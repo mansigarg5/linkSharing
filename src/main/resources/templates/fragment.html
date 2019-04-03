@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" th:href="@{https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css}">
+    <script th:src="@{//ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js}"></script>
+    <script th:src="@{//maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js}"></script>
+    <title>Fragment</title>
+</head>
+<body>
+<div th:fragment="header">
+    <div class="container">
+    <div class="row">
+        <div class="col-sm-2">
+            <div class="btn-group btn-group-justified">
+                <a href="login" class="btn btn-primary">Link Sharing</a>
+            </div>
+        </div>
+        <div class="col-sm-8"></div>
+        <div class="col-sm-2">
+            <div class="well well-sm">Search
+                <a href="#" class="close" data-dismiss="alert" aria-label="close" style="float: right">&times;</a>
+            </div>
+        </div>
+    </div>
+    </div>
+
+    <!--<div class="container-fluid">-->
+        <!--<div class="row">-->
+            <!--<div class="col-md-2">-->
+            <!--</div>-->
+            <!--<div class="col-md-10">-->
+            <!--</div>-->
+        <!--</div>-->
+    <!--</div>-->
+</div>
+</body>
+</html>
+
+

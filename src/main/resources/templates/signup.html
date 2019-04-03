@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+    <title>SignUp</title>
+    <style>
+        .border-radius{
+            -webkit-border-radius: 2px;
+            -moz-border-radius: 2px;
+            border-radius: 2px;
+        }
+    </style>
+</head>
+<body>
+<div class="col-sm-4"></div>
+<div class="container">
+<div class="col-sm-4">
+    <form action="#" th:action="@{/signup}" th:object="${user}" method="post">
+        <h2 class="text-center">Sign up</h2>
+        <div class="form-group">
+            <div class="input-group" style="width: 100%">
+                <input type="text" class="form-control border-radius" th:field="*{firstName}"
+                        placeholder="FirstName" required="required" style="border-radius: 4px"/>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="input-group" style="width: 100%">
+                <input type="text" class="form-control border-radius" th:field="*{lastName}"
+                        placeholder="LastName" required="required" style="border-radius: 4px"/>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="input-group" style="width: 100%">
+                <input type="email" class="form-control border-radius" th:field="*{email}"
+                        placeholder="Email" required="required" style="border-radius: 4px"/>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="input-group" style="width: 100%">
+                <input type="text" class="form-control border-radius" th:field="*{username}"
+                        placeholder="Username" required="required" style="border-radius: 4px"/>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="input-group" style="width: 100%">
+                <input type="password" class="form-control" th:field="*{password}"
+                    placeholder="Password" required="required" style="border-radius: 4px"/>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="input-group" style="width: 100%">
+                <input type="password" class="form-control " name="confirmPassword"
+                    placeholder="Confirm Password" required="required" style="border-radius: 4px"/>
+            </div>
+            <!--<div class="alert alert-success">-->
+                <!--<strong>Success!</strong> You should <a href="#" class="alert-link">read this message</a>.-->
+            <!--</div>-->
+        </div>
+        <div class="form-group">
+            <div class="input-group" style="width: 100%">
+                <input type="file" class="btn btn-primary btn-block" th:field="*{image}" placeholder="Browse">
+            </div>
+        </div>
+        <div class="form-group">
+            <button type="submit" class="btn btn-primary login-btn btn-block">Sign
+                up</button>
+        </div>
+    </form>
+</div>
+</div>
+</body>
+</html>
+
+

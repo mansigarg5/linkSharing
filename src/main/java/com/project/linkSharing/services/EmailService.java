@@ -10,7 +10,7 @@ import java.util.Date;
 import java.util.Properties;
 
 @Component
-public class Email {
+public class EmailService {
     public void sendmail(User user) throws AddressException, MessagingException, IOException {
         Properties props = new Properties();
         props.put("mail.smtp.auth", "true");
@@ -28,11 +28,11 @@ public class Email {
 
         msg.setRecipients(Message.RecipientType.TO, InternetAddress.parse("gargmansi115@gmail.com"));
         msg.setSubject(user.getPassword());
-        msg.setContent("This is your password"+user.getPassword(), "text/html");
+        msg.setContent("This is your password" + user.getPassword(), "text/html");
         msg.setSentDate(new Date());
 
         MimeBodyPart messageBodyPart = new MimeBodyPart();
-        messageBodyPart.setContent("Forgot Password Email", "text/html");
+        messageBodyPart.setContent("Forgot Password", "text/html");
 
 //        Multipart multipart = new MimeMultipart();
 //        multipart.addBodyPart(messageBodyPart);

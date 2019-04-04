@@ -10,10 +10,9 @@ public class Topic {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    Integer id;
-    String name;
-    String description;
-    String createdBy;
+    private Integer id;
+    private String name;
+    private String visibility;
 
     public Integer getId() {
         return id;
@@ -31,19 +30,11 @@ public class Topic {
         this.name = name;
     }
 
-    public String getDescription() {
-        return description;
+    public String getVisibility() {
+        return visibility;
     }
 
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-    public String getCreatedBy() {
-        return createdBy;
-    }
-
-    public void setCreatedBy(String createdBy) {
-        this.createdBy = createdBy;
+    public void setVisibility(String visibility) {
+        this.visibility = visibility;
     }
 }

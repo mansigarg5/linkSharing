@@ -8,29 +8,171 @@
     <script th:src="@{//ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js}"></script>
     <script th:src="@{//maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js}"></script>
     <title>Dashboard</title>
+    <style>
+        .first{
+            display: inline;
+        }
+        .second{
+            float: right;
+        }
+    </style>
 </head>
 <body>
+<div th:include="userFragment::header"></div>
 <div th:object="${user}" class="container-fluid">
     <div class="row">
         <div class="col-sm-4">
             <div class="row">
                 <div class="col-sm-12">
-                    <!--<img src="" th:alt="User Image">-->
+                    <img th:src="@{/images/TTN-logo.jpg}" style="width: 75px; height: 75px">
                     <span th:text="*{firstName}"></span>
+                    <span th:text="*{lastName}"></span><br>
+                    <span th:text="*{username}"></span>
+                    <table>
+                        <tr>
+                            <th>Subscriptions</th>
+                            <th>Topics</th>
+                        </tr>
+                        <tr>
+                            <td>50</td>
+                            <td>30</td>
+                        </tr>
+                    </table>
                 </div>
             </div>
             <div class="row">
                 <div class="col-sm-12">
+                    <div class="bg-primary">Subscriptions
+                        <div style="float: right"><a th:href="@{login}" style="color: white">View All</a></div>
+                    </div>
+                    <img th:src="@{/images/TTN-logo.jpg}" style="width: 50px; height: 50px">
+                    <span th:text="*{firstName}"></span>
+                    <span th:text="*{lastName}"></span><br>
+                    <span th:text="*{username}"></span>
+                    <table>
+                        <tr>
+                            <th>Subscriptions</th>
+                            <th>Topics</th>
+                        </tr>
+                        <tr>
+                            <td>50</td>
+                            <td>30</td>
+                        </tr>
+                    </table>
+                    <div class="dropdown first">
+                        <select class="btn btn-primary">
+                            <option>Serious</option>
+                            <option>Casual</option>
+                            <option>Very Serious</option>
+                        </select>
+                    </div>
+                    <div class="dropdown first">
+                        <select class="btn btn-primary">
+                            <option>Private</option>
+                            <option>Public</option>
+                        </select>
+                    </div>
+                    <div class="input-group-btn first">
+                        <button class="btn btn-default" type="submit">
+                            <i class="fa fa-envelope" aria-hidden="true"></i>
+                        </button>
+                    </div>
+                    <div class="input-group-btn first">
+                        <button class="btn btn-default" type="submit">
+                            <i class="fa fa-file" aria-hidden="true"></i>
+                        </button>
+                    </div>
+                    <div class="input-group-btn first">
+                        <button class="btn btn-default" type="submit">
+                            <i class="fa fa-trash-o" aria-hidden="true"></i>
+                        </button>
+                    </div>
+                </div>
                 </div>
             </div>
             <div class="row">
                 <div class="col-sm-12">
+                    <div class="bg-primary">Trending Topics
+                        <div style="float: right"><a th:href="@{login}" style="color: white">View All</a></div>
+                    </div>
+                    <img th:src="@{/images/TTN-logo.jpg}" style="width: 50px; height: 50px">
+                    <span th:text="*{firstName}"></span>
+                    <span th:text="*{lastName}"></span><br>
+                    <span th:text="*{username}"></span>
+                    <table>
+                        <tr>
+                            <th>Subscriptions</th>
+                            <th>Topics</th>
+                        </tr>
+                        <tr>
+                            <td>50</td>
+                            <td>30</td>
+                        </tr>
+                    </table>
+                    <div class="dropdown first">
+                        <select class="btn btn-primary">
+                            <option>Serious</option>
+                            <option>Casual</option>
+                            <option>Very Serious</option>
+                        </select>
+                    </div>
+                    <div class="dropdown first">
+                        <select class="btn btn-primary">
+                            <option>Private</option>
+                            <option>Public</option>
+                        </select>
+                    </div>
+                    <div class="input-group-btn first">
+                        <button class="btn btn-default" type="submit">
+                            <i class="fa fa-envelope" aria-hidden="true"></i>
+                        </button>
+                    </div>
+                    <div class="input-group-btn first">
+                        <button class="btn btn-default" type="submit">
+                            <i class="fa fa-file" aria-hidden="true"></i>
+                        </button>
+                    </div>
+                    <div class="input-group-btn first">
+                        <button class="btn btn-default" type="submit">
+                            <i class="fa fa-trash-o" aria-hidden="true"></i>
+                        </button>
+                    </div>
                 </div>
             </div>
         </div>
         <div class="col-sm-8">
             <div class="row">
                 <div class="col-sm-12">
+                    <div class="bg-primary">Inbox</div>
+                    <img th:src="@{/images/TTN-logo.jpg}" style="width: 75px; height: 75px">
+                    <span th:text="*{firstName}"></span>
+                    <span th:text="*{lastName}"></span><br>
+                    <span th:text="*{username}"></span>
+                    <p>statement</p>
+                    <div>
+                        <div class="input-group-btn first">
+                            <button class="btn btn-default" type="submit">
+                                <i class="fa fa-facebook-official" aria-hidden="true"></i>
+                            </button>
+                        </div>
+                        <div class="input-group-btn first">
+                            <button class="btn btn-default" type="submit">
+                                <i class="fa fa-twitter" aria-hidden="true"></i>
+                            </button>
+                        </div>
+                        <div class="input-group-btn first">
+                            <button class="btn btn-default" type="submit">
+                                <i class="fa fa-google-plus" aria-hidden="true"></i>
+                            </button>
+                        </div>
+                        <div class="second">
+                            <a th:href="@{login}">Download</a>
+                            <a th:href="@{login}">View full site</a>
+                            <a th:href="@{login}">Mark as read</a>
+                            <a th:href="@{login}">View post</a>
+                        </div>
+                    </div>
+
                 </div>
             </div>
         </div>
@@ -38,3 +180,5 @@
 </div>
 </body>
 </html>
+
+

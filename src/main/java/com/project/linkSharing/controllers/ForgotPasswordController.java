@@ -1,6 +1,7 @@
 package com.project.linkSharing.controllers;
 
 
+import com.project.linkSharing.emailSending.Email;
 import com.project.linkSharing.entities.User;
 import com.project.linkSharing.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,13 +11,17 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.mail.MessagingException;
 import javax.servlet.http.HttpServletRequest;
+import java.io.IOException;
 
 @Controller
 public class ForgotPasswordController {
 
     @Autowired
     UserService userService;
+    @Autowired
+    Email email;
 
     @GetMapping("/forgotPassword")
     public String display(){
@@ -24,10 +29,13 @@ public class ForgotPasswordController {
     }
 
     @PostMapping("/forgotPassword")
-    public ModelAndView submit(HttpServletRequest httpServletRequest){
-        String email = httpServletRequest.getParameter("email");
-        User user = userService.getUserByEmail(email);
-        return new ModelAndView("emailVerification").addObject("user",user);
+    public ModelAndView submit(HttpServletRequest httpServletRequest) throws IOException, MessagingException {
+        String email1 = httpServletRequest.getParameter("email");
+        User user = userService.getUserByEmail(email1);
+        email.sendmail(user);
+        return new ModelAndView("emailVerification");
 
     }
+
+
 }

@@ -1,46 +1,45 @@
 package com.project.linkSharing.emailSending;
 
 import com.project.linkSharing.entities.User;
+import com.project.linkSharing.services.UserService;
+import com.project.linkSharing.util.EmailUtil;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.mail.SimpleMailMessage;
 import org.springframework.stereotype.Component;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import javax.mail.*;
-import javax.mail.internet.*;
-import java.io.IOException;
-import java.util.Date;
-import java.util.Properties;
+import java.util.Optional;
 
 @Component
 public class EmailService {
-    public void sendmail(User user) throws AddressException, MessagingException, IOException {
-        Properties props = new Properties();
-        props.put("mail.smtp.auth", "true");
-        props.put("mail.smtp.starttls.enable", "true");
-        props.put("mail.smtp.host", "smtp.gmail.com");
-        props.put("mail.smtp.port", "587");
 
-        Session session = Session.getInstance(props, new javax.mail.Authenticator() {
-            protected PasswordAuthentication getPasswordAuthentication() {
-                return new PasswordAuthentication("gargmansi115@gmail.com", "thisandthat");
-            }
-        });
-        Message msg = new MimeMessage(session);
-        msg.setFrom(new InternetAddress("gargmansi115@gmail.com", false));
+    @Autowired
+    UserService userService;
+    @Autowired
+    EmailUtil emailUtil;
+    public String sendEmail(String email1, RedirectAttributes redirectAttributes){
+        User user = userService.getUserByEmail(email1);
+        Optional<User> optional = userService.getByEmail(email1);
+        if (!optional.isPresent()) {
+            redirectAttributes.addFlashAttribute("message","We didn't find an account for that e-mail address.");
+            redirectAttributes.addFlashAttribute("alertClass", "alert-danger");
+            return "login";
+        }
+        else {
 
-        msg.setRecipients(Message.RecipientType.TO, InternetAddress.parse("gargmansi115@gmail.com"));
-        msg.setSubject(user.getPassword());
-        msg.setContent("This is your password" + user.getPassword(), "text/html");
-        msg.setSentDate(new Date());
+            SimpleMailMessage passwordResetEmail = new SimpleMailMessage();
+            passwordResetEmail.setTo(user.getEmail());
+            passwordResetEmail.setSubject("Password Reset Request");
+            passwordResetEmail.setText("Your new password is abcd");
+            emailUtil.sendEmail(passwordResetEmail);
 
-        MimeBodyPart messageBodyPart = new MimeBodyPart();
-        messageBodyPart.setContent("Forgot Password", "text/html");
+            User resetUser = optional.get();
 
-//        Multipart multipart = new MimeMultipart();
-//        multipart.addBodyPart(messageBodyPart);
-//        MimeBodyPart attachPart = new MimeBodyPart();
-//
-//        attachPart.attachFile("/var/tmp/image19.png");
-//        multipart.addBodyPart(attachPart);
-//        msg.setContent(multipart);
-        Transport.send(msg);
+            resetUser.setPassword("abcd");
+            userService.saveUser(resetUser);
+            redirectAttributes.addFlashAttribute("message", "A link to reset the password has been sent to " + user.getEmail());
+            redirectAttributes.addFlashAttribute("alertClass", "alert-success");
+            return "emailVerification";
+        }
     }
 }

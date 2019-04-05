@@ -8,7 +8,7 @@
     <script th:src="@{//maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js}"></script>
     <title>User Fragment</title>
 </head>
-
+u
 <body>
 <div th:fragment="header">
     <nav class="bg-primary navbar navbar-inverse">
@@ -27,12 +27,12 @@
                     </div>
                     </form>
                     <div class="input-group-btn">
-                        <form action="#" th:action="@{/createTopic}" method="get">
-                    <button type="submit" class="btn btn-info btn-default" data-toggle="modal" data-target="#myModal">
+                        <!--<form action="#" th:action="@{/createTopic}" method="post">-->
+                    <input type="submit" class="btn btn-info btn-default" data-toggle="modal" data-target="#myModal">
                         <i class="fa fa-comment" aria-hidden="true"></i>
                         <!--<a href="#" th:action="@{/createTopic}"></a>-->
-                    </button>
-                        </form>
+                    </input>
+                        <!--</form>-->
                     </div>
 
                     <div class="modal fade" id="myModal" role="dialog">
@@ -48,8 +48,8 @@
                                     Visibility:
                                             <div class="dropdown first">
                                                 <select class="btn btn-default" th:field="*{visibility}">
-                                                    <option>Private</option>
-                                                    <option>Public</option>
+                                                    <option th:value="Private">Private</option>
+                                                    <option th:value="Public">Public</option>
                                                 </select>
                                             </div><br>
                                 </div>
@@ -77,9 +77,9 @@
                                         Email: <input type="text" required="required" th:name="email"><br>
                                         Topic:
                                         <div class="form-group">
-                                            Topic: <select class="form-control" th:field="*{relatedTopic}">
+                                            Topic: <select class="form-control" th:field="${resources.setRelatedTopic()}">
                                             <option value="0">select operator</option>
-                                            <option th:each="topic : ${topic}" th:value="${topic.name}" th:text="${topic.name}"></option>
+                                            <option th:each="topic : ${topic}" th:value="${topic.getName()}" th:text="${topic.getName()}"></option>
                                         </select>
                                         </div><br>
                                     </div>
@@ -91,11 +91,11 @@
                             </div>
                         </div>
                     <div class="input-group-btn">
-                        <form action="#" th:action="@{/createResources}" method="get">
-                        <button type="button" class="btn btn-info btn-default" data-toggle="modal" data-target="#myModal2">
+                        <!--<form action="#" th:action="@{/createResources}" method="post">-->
+                        <input type="submit" class="btn btn-info btn-default" data-toggle="modal" data-target="#myModal2">
                             <i class="fa fa-link" aria-hidden="true"></i>
-                        </button>
-                        </form>
+                        </input>
+                        <!--</form>-->
                     </div>
                         <div class="modal fade" id="myModal2" role="dialog">
                             <div class="modal-dialog">
@@ -114,9 +114,9 @@
                                                 Description: <textarea class="form-control" rows="5" required="required" th:field="*{description}"></textarea>
                                             </div>
                                             <div class="form-group">
-                                                Topic: <select class="form-control" th:field="*{relatedTopic}">
+                                                Topic: <select class="form-control" th:field="${resources.setRelatedTopic()}">
                                                 <option value="0">select operator</option>
-                                                <option th:each="topic : ${topic}" th:value="${topic.name}" th:text="${topic.name}"></option>
+                                                <option th:each="topic : ${topic}" th:value="${topic.getName()}" th:text="${topic.getName()}"></option>
                                             </select>
                                             </div>
                                         </div>
@@ -129,11 +129,11 @@
                             </div>
                         </div>
                     <div class="input-group-btn">
-                        <form action="#" th:action="@{/createResoucres}" method="get">
-                        <button type="submit" class="btn btn-info btn-default" data-toggle="modal" data-target="#myModal3">
+                        <!--<form action="#" th:action="@{/createResoucres}" method="post">-->
+                        <input type="submit" class="btn btn-info btn-default" data-toggle="modal" data-target="#myModal3">
                             <i class="fa fa-file" aria-hidden="true"></i>
-                        </button>
-                        </form>
+                        </input>
+                        <!--</form>-->
                     </div>
                         <div class="modal fade" id="myModal3" role="dialog">
                             <div class="modal-dialog">
@@ -154,7 +154,7 @@
                                             <div class="form-group">
                                                 Topic: <select class="form-control" th:field="*{relatedTopic}">
                                                 <option value="0">select operator</option>
-                                                <option th:each="topic : ${topic}" th:value="${topic.name}" th:text="${topic.name}"></option>
+                                                <option th:each="topic : ${topic}" th:value="${topic.getName()}" th:text="${topic.getname()}"></option>
                                             </select>
                                             </div>
                                     </div>

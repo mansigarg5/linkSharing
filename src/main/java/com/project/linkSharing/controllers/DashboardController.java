@@ -26,10 +26,12 @@ public class DashboardController {
     @Autowired
     ResourcesService resourcesService;
 
-    @GetMapping("/dashboard")
-    public String display(){
-        return "dashboard";
-    }
+//    @GetMapping("/dashboard")
+//    public String display(Model model) {
+//        model.addAttribute("topic", new Topic());
+//        model.addAttribute("resources", new Resources());
+//        return "dashboard";
+//    }
 
 //    @PostMapping("/search")
 //    public String search(HttpServletRequest httpServletRequest){
@@ -38,22 +40,22 @@ public class DashboardController {
 //        return "user";
 //    }
 
-    @GetMapping("/createTopic")
-    public void createTopic(Model model){
-        model.addAttribute("topic", new Topic());
-    }
+//    @PostMapping("/createTopic")
+//    public void createTopic(Model model){
+//        model.addAttribute("topic", new Topic());
+//    }
 
     @PostMapping("/saveTopic")
     public void saveTopic(@ModelAttribute Topic topic){
         topicService.saveTopic(topic);
     }
 
-    @GetMapping("/createResources")
-    public void createResources(Model model){
-        model.addAttribute("resources", new Resources());
-    }
+//    @PostMapping("/createResources")
+//    public void createResources(Model model){
+//        model.addAttribute("resources", new Resources());
+//    }
 
-    @PostMapping("/createResources")
+    @PostMapping("/saveResources")
     public void saveResources(@ModelAttribute Resources resources){
         resourcesService.saveResources(resources);
     }

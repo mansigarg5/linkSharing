@@ -1,5 +1,7 @@
 package com.project.linkSharing.controllers;
 
+import com.project.linkSharing.entities.Resources;
+import com.project.linkSharing.entities.Topic;
 import com.project.linkSharing.entities.User;
 import com.project.linkSharing.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,7 +28,10 @@ public class LoginController {
         String password = httpServletRequest.getParameter("password");
         User user1 = userService.getUserByUsernameAndPassword(username, password);
         if(user1.getUsername().equals(username) && user1.getPassword().equals(password)){
-            return new ModelAndView("dashboard").addObject("user", user1);
+            return new ModelAndView("dashboard")
+                    .addObject("user", user1)
+                    .addObject("topic", new Topic())
+                    .addObject("resources", new Resources());
         }
         else {
             return new ModelAndView("login");

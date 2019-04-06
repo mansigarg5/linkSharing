@@ -26,12 +26,10 @@ public class DashboardController {
     @Autowired
     ResourcesService resourcesService;
 
-//    @GetMapping("/dashboard")
-//    public String display(Model model) {
-//        model.addAttribute("topic", new Topic());
-//        model.addAttribute("resources", new Resources());
-//        return "dashboard";
-//    }
+    @GetMapping("/dashboard")
+    public String display(){
+        return "login";
+    }
 
 //    @PostMapping("/search")
 //    public String search(HttpServletRequest httpServletRequest){
@@ -40,24 +38,47 @@ public class DashboardController {
 //        return "user";
 //    }
 
-//    @PostMapping("/createTopic")
-//    public void createTopic(Model model){
-//        model.addAttribute("topic", new Topic());
-//    }
 
     @PostMapping("/saveTopic")
-    public void saveTopic(@ModelAttribute Topic topic){
+    public String saveTopic(HttpServletRequest httpServletRequest){
+        String name = httpServletRequest.getParameter("name");
+        String visibility = httpServletRequest.getParameter("visibility");
+        Topic topic = new Topic();
+        topic.setName(name);
+        topic.setVisibility(visibility);
         topicService.saveTopic(topic);
+        return "dashboard";
+    }
+    @PostMapping("/saveLink")
+    public String saveLink(HttpServletRequest httpServletRequest){
+        String link = httpServletRequest.getParameter("link");
+        String description = httpServletRequest.getParameter("description");
+        String relatedTopic = httpServletRequest.getParameter("relatedTopic");
+        Resources resources = new Resources();
+        resources.setLink(link);
+        resources.setDescription(description);
+        resources.setRelatedTopic(relatedTopic);
+        resourcesService.saveResources(resources);
+        return "dashboard";
     }
 
-//    @PostMapping("/createResources")
-//    public void createResources(Model model){
-//        model.addAttribute("resources", new Resources());
-//    }
+    @PostMapping("/saveDocument")
+    public String saveDocument(HttpServletRequest httpServletRequest){
+        String document = httpServletRequest.getParameter("document");
+        String description = httpServletRequest.getParameter("description");
+        String relatedTopic = httpServletRequest.getParameter("relatedTopic");
+        Resources resources = new Resources();
+        resources.setDocument(document);
+        resources.setDescription(description);
+        resources.setRelatedTopic(relatedTopic);
+        resourcesService.saveResources(resources);
+        return "dashboard";
+    }
 
     @PostMapping("/saveResources")
-    public void saveResources(@ModelAttribute Resources resources){
+    public String saveResources(@ModelAttribute Resources resources){
         resourcesService.saveResources(resources);
+        return "dashboard";
     }
 
 

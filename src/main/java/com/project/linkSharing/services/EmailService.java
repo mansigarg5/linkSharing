@@ -1,4 +1,4 @@
-package com.project.linkSharing.emailSending;
+package com.project.linkSharing.services;
 
 import com.project.linkSharing.entities.User;
 import com.project.linkSharing.services.UserService;
@@ -30,12 +30,13 @@ public class EmailService {
             SimpleMailMessage passwordResetEmail = new SimpleMailMessage();
             passwordResetEmail.setTo(user.getEmail());
             passwordResetEmail.setSubject("Password Reset Request");
-            passwordResetEmail.setText("Your new password is abcd");
+            passwordResetEmail.setText("Your old password was "+user.getPassword()+"\n");
+            passwordResetEmail.setText("Your new password is iamstillsadu");
             emailUtil.sendEmail(passwordResetEmail);
 
             User resetUser = optional.get();
 
-            resetUser.setPassword("abcd");
+            resetUser.setPassword("iamstillsadu");
             userService.saveUser(resetUser);
             redirectAttributes.addFlashAttribute("message", "A link to reset the password has been sent to " + user.getEmail());
             redirectAttributes.addFlashAttribute("alertClass", "alert-success");

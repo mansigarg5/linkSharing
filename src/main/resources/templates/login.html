@@ -21,11 +21,11 @@
                         <div class="col-md-2">
                             <img src="${pageContext.request.contextPath}/resources/images/new.jpg" alt="image-icon" class="img-thumbnail">
                         </div>
-                        <span class="col-md-3" style="margin-left:-15px;">Uday Pratap Singh</span>
-                        <span class="col-md-5" style="opacity:0.5;">@uday 5 min</span>
-                        <span><a id="grails">Grails</a></span>
+                        <span class="col-md-3" style="margin-left:-15px;">Mansi Garg</span>
+                        <span class="col-md-5" style="opacity:0.5;">@mansi 5 min</span>
+                        <span><a>Grails</a></span>
                         <div>
-                            <span>Lorem ipsum dolor sit amnet, consectetur adipiscing elit.Something extra text to be displayed</span>
+                            <span>Some text to be displayed</span>
                         </div>
                         <div>
                             <div class="col-md-2">
@@ -41,11 +41,11 @@
                         <div class="col-md-2">
                             <img src="${pageContext.request.contextPath}/resources/images/new.jpg" alt="image-icon" class="img-thumbnail">
                         </div>
-                        <span class="col-md-3" style="margin-left:-15px;">Uday Pratap Singh</span>
-                        <span class="col-md-5" style="opacity:0.5;">@uday 10 min</span>
-                        <span><a id="grails">Grails</a></span>
+                        <span class="col-md-3" style="margin-left:-15px;">Mansi Garg</span>
+                        <span class="col-md-5" style="opacity:0.5;">@mansi 10 min</span>
+                        <span><a>Grails</a></span>
                         <div>
-                            <span>Lorem ipsum dolor sit amnet, consectetur adipiscing elit.Something extra text to be displayed</span>
+                            <span>Some text to be displayed</span>
                         </div>
                         <div>
                             <div class="col-md-2">
@@ -75,11 +75,11 @@
                 <div class="col-md-2">
                     <img src="${pageContext.request.contextPath}/resources/images/new.jpg" alt="image-icon" class="img-thumbnail">
                 </div>
-                <span class="col-md-3" style="margin-left:-15px;">Uday Pratap Singh</span>
-                <span class="col-md-5" style="opacity:0.5;">@uday 21 jun 2014</span>
-                <span><a id="grails">Grails</a></span>
+                <span class="col-md-3" style="margin-left:-15px;">Mansi Garg</span>
+                <span class="col-md-5" style="opacity:0.5;">@mansi 4 april 2019</span>
+                <span><a>Grails</a></span>
                 <div>
-                    <span>Lorem ipsum dolor sit amnet, consectetur adipiscing elit.Something extra text to be displayed</span>
+                    <span>Some text to be displayed</span>
                 </div>
                 <div>
                     <div class="col-md-2">
@@ -93,7 +93,7 @@
         </div>
         </div>
         <div class="col-sm-4">
-            <form method="post">
+            <form th:action="@{/login}" method="post">
                 <h2 class="text-center">Log in</h2>
                 <div class="form-group">
                     <div class="input-group">
@@ -108,7 +108,7 @@
                     </div>
                 </div>
                 <div class="form-group">
-                    <button type="submit" class="btn btn-primary login-btn btn-block">Log
+                    <button href="dashboard" type="submit" class="btn btn-primary login-btn btn-block">Log
                         in</button>
                 </div>
                 <p><a href="forgotPassword" class="btn">Forgot password?</a>

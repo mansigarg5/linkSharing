@@ -1,10 +1,9 @@
 package com.project.linkSharing.entities;
 
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import org.springframework.web.multipart.MultipartFile;
+
+import javax.persistence.*;
 
 @Entity
 public class User {
@@ -17,19 +16,10 @@ public class User {
     private String email;
     private String username;
     private String password;
-    private byte[] image;
-
-    @Override
-    public String toString() {
-        return "User{" +
-                "id=" + id +
-                ", firstName='" + firstName + '\'' +
-                ", lastName='" + lastName + '\'' +
-                ", email='" + email + '\'' +
-                ", username='" + username + '\'' +
-                ", password='" + password + '\'' +
-                '}';
-    }
+    private String image;
+//    @Transient
+//    private MultipartFile image;
+//    private String fileName;
 
     public Integer getId() {
         return id;
@@ -37,14 +27,6 @@ public class User {
 
     public void setId(Integer id) {
         this.id = id;
-    }
-
-    public byte[] getImage() {
-        return image;
-    }
-
-    public void setImage(byte[] image) {
-        this.image = image;
     }
 
     public String getFirstName() {
@@ -86,4 +68,40 @@ public class User {
     public void setPassword(String password) {
         this.password = password;
     }
+
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
+    }
+    //    public MultipartFile getImage() {
+//        return image;
+//    }
+//
+//    public void setImage(MultipartFile image) {
+//        this.image = image;
+//    }
+//
+//    public String getFileName() {
+//        return fileName;
+//    }
+//
+//    public void setFileName(String fileName) {
+//        this.fileName = fileName;
+//    }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "id=" + id +
+                ", firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", email='" + email + '\'' +
+                ", username='" + username + '\'' +
+                ", password='" + password + '\'' +
+                '}';
+    }
+
 }

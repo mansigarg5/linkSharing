@@ -20,7 +20,7 @@
 <div class="col-sm-4"></div>
 <div class="container">
 <div class="col-sm-4">
-    <form action="#" th:action="@{/signup}" th:object="${user}" method="post">
+    <form th:action="@{/signup}" th:object="${user}" method="post">
         <h2 class="text-center">Sign up</h2>
         <div class="form-group">
             <div class="input-group" style="width: 100%">
@@ -67,7 +67,7 @@
             </div>
         </div>
         <div class="form-group">
-            <button type="submit" class="btn btn-primary login-btn btn-block">Sign
+            <button href="dashboard"  type="submit" class="btn btn-primary login-btn btn-block">Sign
                 up</button>
         </div>
     </form>

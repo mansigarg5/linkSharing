@@ -11,7 +11,8 @@ public class Resources {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     private String link;
-    private byte[] document;
+    private String document;
+    private String description;
     private String relatedTopic;
 
     public Integer getId() {
@@ -30,11 +31,11 @@ public class Resources {
         this.link = link;
     }
 
-    public byte[] getDocument() {
+    public String getDocument() {
         return document;
     }
 
-    public void setDocument(byte[] document) {
+    public void setDocument(String document) {
         this.document = document;
     }
 
@@ -44,5 +45,13 @@ public class Resources {
 
     public void setRelatedTopic(String relatedTopic) {
         this.relatedTopic = relatedTopic;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 }

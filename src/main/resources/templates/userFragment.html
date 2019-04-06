@@ -1,122 +1,89 @@
-<!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" th:href="@{https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css}">
-    <script th:src="@{//ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js}"></script>
-    <script th:src="@{//maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js}"></script>
-    <title>User Fragment</title>
-</head>
-u
-<body>
-<div th:fragment="header">
-    <nav class="bg-primary navbar navbar-inverse">
-        <div class="container-fluid">
-            <div class="navbar-header">
-                <a class="navbar-brand" href="login">Link Sharing</a>
-            </div>
-            <form class="navbar-form navbar-right">
-                <div class="input-group" style="color: black">
-                    <form action="#" th:action="@{/search}" method="post">
-                    <input type="text" class="form-control" placeholder="Search" name="search">
-                    <div class="input-group-btn">
-                        <button class="btn btn-default" type="submit">
-                            <i class="glyphicon glyphicon-search"></i>
+    <!DOCTYPE html>
+    <html lang="en" xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" th:href="@{https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css}">
+        <script th:src="@{//ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js}"></script>
+        <script th:src="@{//maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js}"></script>
+        <title>User Fragment</title>
+    </head>
+    <body>
+    <div th:fragment="header">
+        <nav class="bg-primary navbar navbar-inverse">
+            <div class="container-fluid">
+                <div class="navbar-header">
+                    <a class="navbar-brand" href="login">Link Sharing</a>
+                </div>
+                <form class="navbar-form navbar-right">
+                    <div style="display: flex">
+                        <form action="#" th:action="@{/search}" method="post">
+                        <input type="text" class="form-control" placeholder="Search" name="search">
+                            <button class="btn btn-default" type="submit">
+                                <i class="glyphicon glyphicon-search"></i>
+                            </button>
+                        </form>
+                        <button type="button" class="btn btn-info btn-default" data-toggle="modal" data-target="#create-topic-modal">
+                            <i class="fa fa-comment" aria-hidden="true"></i>
                         </button>
-                    </div>
-                    </form>
-                    <div class="input-group-btn">
-                        <!--<form action="#" th:action="@{/createTopic}" method="post">-->
-                    <input type="submit" class="btn btn-info btn-default" data-toggle="modal" data-target="#myModal">
-                        <i class="fa fa-comment" aria-hidden="true"></i>
-                        <!--<a href="#" th:action="@{/createTopic}"></a>-->
-                    </input>
-                        <!--</form>-->
-                    </div>
-
-                    <div class="modal fade" id="myModal" role="dialog">
-                        <div class="modal-dialog">
-                            <div class="modal-content">
-                                <form action="#" th:action="@{/saveTopic}" th:object="${topic}" method="post">
-                                <div class="modal-header">
-                                    <button type="button" class="close" data-dismiss="modal">&times;</button>
-                                    <h4 class="modal-title">Create Topic</h4>
-                                </div>
-                                <div class="modal-body">
-                                    Name: <input type="text" required="required" th:field="*{name}"><br>
-                                    Visibility:
-                                            <div class="dropdown first">
-                                                <select class="btn btn-default" th:field="*{visibility}">
-                                                    <option th:value="Private">Private</option>
-                                                    <option th:value="Public">Public</option>
-                                                </select>
-                                            </div><br>
-                                </div>
-                                <div class="modal-footer">
-                                    <button type="submit" class="btn btn-primary" >Save</button>
-                                    <button type="button" class="btn btn-primary" data-dismiss="modal">Cancel</button>
-                                </div>
-                                </form>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="input-group-btn">
-                        <button type="button" class="btn btn-info btn-default" data-toggle="modal" data-target="#myModal1">
-                            <i class="fa fa-envelope" aria-hidden="true"></i>
-                        </button>
-                    </div>
-                        <div class="modal fade" id="myModal1" role="dialog">
+                        <div class="modal fade" id="create-topic-modal" role="dialog" style="color: black">
                             <div class="modal-dialog">
                                 <div class="modal-content">
-                                    <div class="modal-header">
-                                        <button type="button" class="close" data-dismiss="modal">&times;</button>
-                                        <h4 class="modal-title">Send Invitation</h4>
-                                    </div>
-                                    <div class="modal-body">
-                                        Email: <input type="text" required="required" th:name="email"><br>
-                                        Topic:
-                                        <div class="form-group">
-                                            Topic: <select class="form-control" th:field="${resources.setRelatedTopic()}">
-                                            <option value="0">select operator</option>
-                                            <option th:each="topic : ${topic}" th:value="${topic.getName()}" th:text="${topic.getName()}"></option>
-                                        </select>
-                                        </div><br>
-                                    </div>
-                                    <div class="modal-footer">
-                                        <button type="submit" class="btn btn-primary" >Invite</button>
-                                        <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    <div class="input-group-btn">
-                        <!--<form action="#" th:action="@{/createResources}" method="post">-->
-                        <input type="submit" class="btn btn-info btn-default" data-toggle="modal" data-target="#myModal2">
-                            <i class="fa fa-link" aria-hidden="true"></i>
-                        </input>
-                        <!--</form>-->
-                    </div>
-                        <div class="modal fade" id="myModal2" role="dialog">
-                            <div class="modal-dialog">
-                                <div class="modal-content">
-                                    <form action="#" th:action="@{/saveResources}" th:object="${resources}" method="post">
+                                    <form th:action="@{/saveTopic}" method="post">
                                         <div class="modal-header">
                                             <button type="button" class="close" data-dismiss="modal">&times;</button>
-                                            <h4 class="modal-title">Modal Header</h4>
+                                            <h4 class="modal-title">Create Topic</h4>
+                                        </div>
+                                        <div class="modal-body">
+                                            Name: <input type="text" required="required" name="name"><br><br>
+                                            Visibility:
+                                            <div class="dropdown first">
+                                                <select class="btn btn-default" name="visibility" >
+                                                    <option value="Private">Private</option>
+                                                    <option value="Public">Public</option>
+                                                </select>
+                                            </div><br>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="submit" class="btn btn-primary" >Save</button>
+                                            <button type="button" class="btn btn-primary" data-dismiss="modal">Cancel</button>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+
+                            <button type="button" class="btn btn-info btn-default" data-toggle="modal" data-target="#modal1">
+                                <i class="fa fa-envelope" aria-hidden="true"></i>
+                            </button>
+
+                            <button type="button" class="btn btn-info btn-default" data-toggle="modal" data-target="#create-link-modal">
+                                <i class="fa fa-link" aria-hidden="true"></i>
+                            </button>
+
+                        <div class="modal fade" id="create-link-modal" role="dialog" style="color: black">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <form th:action="@{/saveLink}" method="post">
+                                        <div class="modal-header">
+                                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                            <h4 class="modal-title">Create Link</h4>
                                         </div>
                                         <div class="modal-body">
                                             <div class="form-group">
-                                                Link: <input type="text" class="form-control" required="required" th:field="*{link}">
+                                                Link: <input type="text" class="form-control" required="required" name="link">
                                                 <input type="file">
                                             </div>
+                                            <br><br>
                                             <div class="form-group">
-                                                Description: <textarea class="form-control" rows="5" required="required" th:field="*{description}"></textarea>
+                                                Description: <textarea class="form-control" rows="5" required="required" name="description"></textarea>
+
                                             </div>
+                                            <br><br>
                                             <div class="form-group">
-                                                Topic: <select class="form-control" th:field="${resources.setRelatedTopic()}">
+                                                Topic: <select class="form-control" name = "relatedTopic">
                                                 <option value="0">select operator</option>
-                                                <option th:each="topic : ${topic}" th:value="${topic.getName()}" th:text="${topic.getName()}"></option>
+                                                <option th:each="topic : ${topicList}" th:value="${topic.name}" th:text="${topic.name}"></option>
                                             </select>
                                             </div>
                                         </div>
@@ -128,48 +95,50 @@ u
                                 </div>
                             </div>
                         </div>
-                    <div class="input-group-btn">
-                        <!--<form action="#" th:action="@{/createResoucres}" method="post">-->
-                        <input type="submit" class="btn btn-info btn-default" data-toggle="modal" data-target="#myModal3">
-                            <i class="fa fa-file" aria-hidden="true"></i>
-                        </input>
-                        <!--</form>-->
-                    </div>
-                        <div class="modal fade" id="myModal3" role="dialog">
+                            <button type="button" class="btn btn-info btn-default" data-toggle="modal" data-target="#create-document-modal">
+                                <i class="fa fa-file" aria-hidden="true"></i>
+                            </button>
+
+                        <div class="modal fade" id="create-document-modal" role="dialog" style="color: black">
                             <div class="modal-dialog">
                                 <div class="modal-content">
-                                    <form action="#" th:action="@{/saveResources}" th:object="${resources}" method="post">
-                                    <div class="modal-header">
-                                        <button type="button" class="close" data-dismiss="modal">&times;</button>
-                                        <h4 class="modal-title">Modal Header</h4>
-                                    </div>
-                                    <div class="modal-body">
+                                    <form action="#" th:action="@{/saveDocument}" method="post">
+                                        <div class="modal-header">
+                                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                            <h4 class="modal-title">Create Document</h4>
+                                        </div>
+                                        <div class="modal-body">
                                             <div class="form-group">
-                                                Document: <input type="text" class="form-control" required="required" th:field="*{document}">
+                                                Document: <input type="text" class="form-control" required="required" name = "document">
                                                 <input type="file">
                                             </div>
+                                            <br><br>
                                             <div class="form-group">
-                                                Description: <textarea class="form-control" rows="5" required="required" th:field="*{description}"></textarea>
+                                                Description: <textarea class="form-control" rows="5" required="required" name="description"></textarea>
+
                                             </div>
+                                            <br><br>
                                             <div class="form-group">
-                                                Topic: <select class="form-control" th:field="*{relatedTopic}">
+                                                Topic: <select class="form-control" name="relatedTopic">
                                                 <option value="0">select operator</option>
-                                                <option th:each="topic : ${topic}" th:value="${topic.getName()}" th:text="${topic.getname()}"></option>
+                                                <option th:each="topic : ${topicList}" th:value="${topic.name}" th:text="${topic.name}"></option>
                                             </select>
                                             </div>
-                                    </div>
-                                    <div class="modal-footer">
-                                        <button type="submit" class="btn btn-primary" >Share</button>
-                                        <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
-                                    </div>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="submit" class="btn btn-primary" >Share</button>
+                                            <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+                                        </div>
                                     </form>
                                 </div>
                             </div>
                         </div>
                     </div>
-            </form>
-        </div>
-    </nav>
-</div>
-</body>
-</html>
+                </form>
+            </div>
+        </nav>
+    </div>
+    </body>
+    </html>
+
+

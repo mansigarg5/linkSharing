@@ -1,6 +1,6 @@
 package com.project.linkSharing.controllers;
 
-import com.project.linkSharing.emailSending.EmailService;
+import com.project.linkSharing.services.EmailService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;

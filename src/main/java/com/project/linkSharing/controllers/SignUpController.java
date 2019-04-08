@@ -10,9 +10,18 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+import org.springframework.mock.web.MockMultipartFile;
+
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.List;
 
 @Controller
@@ -22,6 +31,8 @@ public class SignUpController {
     UserService userService;
     @Autowired
     TopicService topicService;
+    @Autowired
+    HttpSession session;
 
     @GetMapping("/signup")
     public ModelAndView display(ModelAndView modelAndView){
@@ -32,9 +43,10 @@ public class SignUpController {
     @PostMapping("/signup")
     public ModelAndView submit(@ModelAttribute User user, HttpServletRequest httpServletRequest){
         if(user.getPassword().equals(httpServletRequest.getParameter("confirmPassword"))){
+            session.setAttribute("user", user);
             List<Topic> topicList = topicService.listTopics();
             userService.saveUser(user);
-            return new ModelAndView("dashboard").addObject("user", user)
+            return new ModelAndView("dashboard")
                     .addObject("topicList", topicList);
         }
         else{

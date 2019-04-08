@@ -16,16 +16,16 @@
         <div class="col-sm-8">
             <div class="panel panel-default" style="margin-top:15px;">
                 <div class="panel-heading bg-primary">Recent shares</div>
-                <div class="panel-body">
+                <div class="panel-body" th:each="resources:${resourcesList}">
                     <div>
                         <div class="col-md-2">
-                            <img src="${pageContext.request.contextPath}/resources/images/new.jpg" alt="image-icon" class="img-thumbnail">
+                            <img th:src="@{/images/TTN-logo.jpg}" alt="image-icon" class="img-thumbnail">
                         </div>
-                        <span class="col-md-3" style="margin-left:-15px;">Mansi Garg</span>
-                        <span class="col-md-5" style="opacity:0.5;">@mansi 5 min</span>
-                        <span><a>Grails</a></span>
+                        <span class="col-md-3" style="margin-left:-15px;" th:text="${resources.createdBy}"></span>
+                        <span class="col-md-5" style="opacity:0.5;" th:text="${resources.date}"></span>
+                        <span><a th:text="${resources.relatedTopic}"></a></span>
                         <div>
-                            <span>Some text to be displayed</span>
+                            <span th:text="${resources.description}"></span>
                         </div>
                         <div>
                             <div class="col-md-2">
@@ -36,27 +36,6 @@
                             <span style="margin-left:295px;"><a>View Post</a></span>
                         </div>
                     </div>
-                    <div>
-
-                        <div class="col-md-2">
-                            <img src="${pageContext.request.contextPath}/resources/images/new.jpg" alt="image-icon" class="img-thumbnail">
-                        </div>
-                        <span class="col-md-3" style="margin-left:-15px;">Mansi Garg</span>
-                        <span class="col-md-5" style="opacity:0.5;">@mansi 10 min</span>
-                        <span><a>Grails</a></span>
-                        <div>
-                            <span>Some text to be displayed</span>
-                        </div>
-                        <div>
-                            <div class="col-md-2">
-                                <i class="fa fa-facebook-square" style="margin-left:-15px;"></i>
-                                <i class="fa fa-tumblr"></i>
-                                <i class="fa fa-google-plus"></i>
-                            </div>
-                            <span style="margin-left:295px;"><a>View Post</a></span>
-                        </div>
-                    </div>
-
                 </div>
             </div>
             <div class="panel panel-default" style="margin-top:15px;">
@@ -71,15 +50,15 @@
                 </div>
 
             </div>
-            <div class="panel-body">
+            <div class="panel-body" th:each="resources:${resourcesList}">
                 <div class="col-md-2">
-                    <img src="${pageContext.request.contextPath}/resources/images/new.jpg" alt="image-icon" class="img-thumbnail">
+                    <img src="/images/TTN-logo.jpg" alt="image-icon" class="img-thumbnail">
                 </div>
-                <span class="col-md-3" style="margin-left:-15px;">Mansi Garg</span>
-                <span class="col-md-5" style="opacity:0.5;">@mansi 4 april 2019</span>
-                <span><a>Grails</a></span>
+                <span class="col-md-3" style="margin-left:-15px;" th:text="${resources.createdBy}"></span>
+                <span class="col-md-5" style="opacity:0.5;" th:text="${resources.date}"></span>
+                <span><a th:text="${resources.relatedTopic}"></a></span>
                 <div>
-                    <span>Some text to be displayed</span>
+                    <span th:text="${resources.description}"></span>
                 </div>
                 <div>
                     <div class="col-md-2">

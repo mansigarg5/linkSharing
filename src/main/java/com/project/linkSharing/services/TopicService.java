@@ -20,4 +20,8 @@ public class TopicService {
     public List<Topic> listTopics(){
         return topicRepository.findAll();
     }
+
+    public List<String> listPublicTopicName(){
+        return topicRepository.findByVisibility("public");
+    }
 }

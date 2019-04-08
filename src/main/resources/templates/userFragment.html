@@ -23,7 +23,7 @@
                                 <i class="glyphicon glyphicon-search"></i>
                             </button>
                         </form>
-                        <button type="button" class="btn btn-info btn-default" data-toggle="modal" data-target="#create-topic-modal">
+                        <button type="button" class="btn btn-primary btn-info" data-toggle="modal" data-target="#create-topic-modal">
                             <i class="fa fa-comment" aria-hidden="true"></i>
                         </button>
                         <div class="modal fade" id="create-topic-modal" role="dialog" style="color: black">
@@ -38,7 +38,7 @@
                                             Name: <input type="text" required="required" name="name"><br><br>
                                             Visibility:
                                             <div class="dropdown first">
-                                                <select class="btn btn-default" name="visibility" >
+                                                <select class="btn btn-default" name="visibility">
                                                     <option value="Private">Private</option>
                                                     <option value="Public">Public</option>
                                                 </select>
@@ -53,11 +53,38 @@
                             </div>
                         </div>
 
-                            <button type="button" class="btn btn-info btn-default" data-toggle="modal" data-target="#modal1">
+                            <button type="button" class="btn btn-primary btn-info" data-toggle="modal" data-target="#send-invite-modal">
                                 <i class="fa fa-envelope" aria-hidden="true"></i>
                             </button>
 
-                            <button type="button" class="btn btn-info btn-default" data-toggle="modal" data-target="#create-link-modal">
+                        <div class="modal fade" id="send-invite-modal" role="dialog" style="color: black">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <form th:action="@{/sendInvite}" method="post">
+                                    <div class="modal-header">
+                                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                        <h4 class="modal-title">Send Invitation</h4>
+                                    </div>
+                                    <div class="modal-body">
+                                        Email: <input type="text" required="required" name="email"><br>
+                                        <div class="form-group">
+                                            Topic: <select class="form-control" name="relatedTopic">
+                                            <option value="0">select operator</option>
+                                            <option th:each="topic : ${topicList}" th:value="${topic.name}" th:text="${topic.name}"></option>
+                                        </select>
+                                        </div><br>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="submit" class="btn btn-primary" >Invite</button>
+                                        <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+                                    </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <button type="button" class="btn btn-primary btn-info" data-toggle="modal" data-target="#create-link-modal">
                                 <i class="fa fa-link" aria-hidden="true"></i>
                             </button>
 
@@ -86,6 +113,7 @@
                                                 <option th:each="topic : ${topicList}" th:value="${topic.name}" th:text="${topic.name}"></option>
                                             </select>
                                             </div>
+
                                         </div>
                                         <div class="modal-footer">
                                             <button type="submit" class="btn btn-primary" >Share</button>
@@ -95,7 +123,7 @@
                                 </div>
                             </div>
                         </div>
-                            <button type="button" class="btn btn-info btn-default" data-toggle="modal" data-target="#create-document-modal">
+                            <button type="button" class="btn btn-primary btn-info" data-toggle="modal" data-target="#create-document-modal">
                                 <i class="fa fa-file" aria-hidden="true"></i>
                             </button>
 
@@ -132,6 +160,22 @@
                                     </form>
                                 </div>
                             </div>
+                        </div>
+
+
+                        <div class="dropdown">
+                            <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown" th:text="${session.user.username}">User
+                                <span class="caret"></span>
+                                <i class="fa fa-user fa-lg" aria-hidden="true"></i>
+                            </button>
+                            <ul class="dropdown-menu">
+                                <li><a href="editProfile">Profile</a></li>
+                                <li><a href="users">Users</a></li>
+                                <li><a href="topic">Topics</a></li>
+                                <li><a href="post">Posts</a></li>
+                                <li class="divider"></li>
+                                <li><a th:href="@{/logout}">Logout</a></li>
+                            </ul>
                         </div>
                     </div>
                 </form>

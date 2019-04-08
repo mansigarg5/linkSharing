@@ -19,21 +19,21 @@
 </head>
 <body>
 <div th:include="userFragment::header"></div>
-<div th:object="${user}" class="container-fluid">
+<div class="container-fluid">
     <div class="row">
-        <div class="col-sm-4">
+        <div class="col-sm-5">
             <div class="row">
                 <div class="col-sm-12">
                     <img th:src="@{/images/TTN-logo.jpg}" style="width: 75px; height: 75px">
-                    <span th:text="*{firstName}"></span>
-                    <span th:text="*{lastName}"></span><br>
-                    <span th:text="*{username}"></span>
+                    <span th:text="${session.user.firstName}"></span>
+                    <span th:text="${session.user.lastName}"></span><br>
+                    <span th:text="${session.user.username}"></span>
                     <table>
                         <tr>
                             <th>Subscriptions</th>
                             <th>Topics</th>
                         </tr>
-                        <tr>
+                    update    <tr>
                             <td>50</td>
                             <td>30</td>
                         </tr>
@@ -46,9 +46,9 @@
                         <div style="float: right"><a th:href="@{login}" style="color: white">View All</a></div>
                     </div>
                     <img th:src="@{/images/TTN-logo.jpg}" style="width: 50px; height: 50px">
-                    <span th:text="*{firstName}"></span>
-                    <span th:text="*{lastName}"></span><br>
-                    <span th:text="*{username}"></span>
+                    <span th:text="${session.user.firstName}"></span>
+                    <span th:text="${session.user.lastName}"></span><br>
+                    <span th:text="${session.user.username}"></span>
                     <table>
                         <tr>
                             <th>Subscriptions</th>
@@ -89,16 +89,15 @@
                     </div>
                 </div>
                 </div>
-            </div>
             <div class="row">
                 <div class="col-sm-12">
                     <div class="bg-primary">Trending Topics
                         <div style="float: right"><a th:href="@{login}" style="color: white">View All</a></div>
                     </div>
                     <img th:src="@{/images/TTN-logo.jpg}" style="width: 50px; height: 50px">
-                    <span th:text="*{firstName}"></span>
-                    <span th:text="*{lastName}"></span><br>
-                    <span th:text="*{username}"></span>
+                    <span th:text="${session.user.firstName}"></span>
+                    <span th:text="${session.user.lastName}"></span><br>
+                    <span th:text="${session.user.username}"></span>
                     <table>
                         <tr>
                             <th>Subscriptions</th>
@@ -140,14 +139,14 @@
                 </div>
             </div>
         </div>
-        <div class="col-sm-8">
+        <div class="col-sm-7">
             <div class="row">
                 <div class="col-sm-12">
                     <div class="bg-primary">Inbox</div>
                     <img th:src="@{/images/TTN-logo.jpg}" style="width: 75px; height: 75px">
-                    <span th:text="*{firstName}"></span>
-                    <span th:text="*{lastName}"></span><br>
-                    <span th:text="*{username}"></span>
+                    <span th:text="${session.user.firstName}"></span>
+                    <span th:text="${session.user.lastName}"></span><br>
+                    <span th:text="${session.user.username}"></span>
                     <p>statement</p>
                     <div>
                         <div class="input-group-btn first">

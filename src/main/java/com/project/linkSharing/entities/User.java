@@ -13,7 +13,9 @@ public class User {
     Integer id;
     private String firstName;
     private String lastName;
+    @Column(unique = true)
     private String email;
+    @Column(unique = true)
     private String username;
     private String password;
     private String image;

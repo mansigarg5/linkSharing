@@ -10,11 +10,40 @@
     <title>Post</title>
 </head>
 <body>
-<div class="container-fluid">
+<div class="container">
     <div class="row">
         <div class="col-md-7">
+            <div class="panel panel-default" style="margin-top:15px;">
+                <div class="panel-body">
+                    <div>
+                        <div class="col-md-2">
+                            <img th:src="@{/images/TTN-logo.jpg}" alt="image-icon" class="img-thumbnail">
+                        </div>
+                        <span class="col-md-3" style="margin-left:-15px;">Mansi garg</span>
+                        <span class="col-md-5" style="opacity:0.5;">@mansi</span>
+                        <span><a>Java</a></span>
+                        <div>
+                            <span>Kch bhi</span>
+                        </div>
+                        <br><br>
+                        <div class="input-group-btn first">
+                            <button class="btn btn-default"><i class="fa fa-facebook-square" aria-hidden="true"></i></button>
+                            <button class="btn btn-default"><i class="fa fa-twitter" aria-hidden="true"></i></button>
+                            <button class="btn btn-default"><i class="fa fa-google-plus" aria-hidden="true"></i></button>
+                        </div>
+                        <div>
+                            <a th:href="@{login}">Download</a>
+                            <a th:href="@{login}">View full site</a>
+                            <a th:href="@{login}">Mark as read</a>
+                            <a th:href="@{login}">View post</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
         </div>
         <div class="col-md-5">
+            <div th:include="trendingTopicsFragment::trendingTopics"></div>
         </div>
     </div>
 </div>

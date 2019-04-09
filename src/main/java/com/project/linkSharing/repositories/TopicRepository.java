@@ -10,6 +10,7 @@ import java.util.List;
 public interface TopicRepository extends CrudRepository<Topic, Integer> {
     Topic save(Topic topic);
     List<Topic> findAll();
+    Integer countByCreatedBy(String createdBy);
     @Query("select name from Topic where visibility = :visibility")
     List<String> findByVisibility(@Param("visibility") String visibility);
 }

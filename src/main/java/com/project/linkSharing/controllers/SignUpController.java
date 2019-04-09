@@ -1,8 +1,10 @@
 package com.project.linkSharing.controllers;
 
 import com.project.linkSharing.entities.Resources;
+import com.project.linkSharing.entities.Subscription;
 import com.project.linkSharing.entities.Topic;
 import com.project.linkSharing.entities.User;
+import com.project.linkSharing.services.SubscriptionService;
 import com.project.linkSharing.services.TopicService;
 import com.project.linkSharing.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,6 +35,8 @@ public class SignUpController {
     TopicService topicService;
     @Autowired
     HttpSession session;
+    @Autowired
+    SubscriptionService subscriptionService;
 
     @GetMapping("/signup")
     public ModelAndView display(ModelAndView modelAndView){
@@ -44,10 +48,16 @@ public class SignUpController {
     public ModelAndView submit(@ModelAttribute User user, HttpServletRequest httpServletRequest){
         if(user.getPassword().equals(httpServletRequest.getParameter("confirmPassword"))){
             session.setAttribute("user", user);
-            List<Topic> topicList = topicService.listTopics();
             userService.saveUser(user);
+            List<Topic> topicList = topicService.listTopics();
+            List<Subscription> subscriptionList = subscriptionService.listSubscriptionByUserid(user.getId());
+            Integer postCount = topicService.countTopicByCreatedBy(user.getUsername());
+            Integer subscriptionCount = subscriptionService.countSubscription(user.getId());
             return new ModelAndView("dashboard")
-                    .addObject("topicList", topicList);
+                    .addObject("topicList", topicList)
+                    .addObject("subscriptionList", subscriptionList)
+                    .addObject("subscriptionCount", subscriptionCount)
+                    .addObject("postCount", postCount);
         }
         else{
             return new ModelAndView("signup");

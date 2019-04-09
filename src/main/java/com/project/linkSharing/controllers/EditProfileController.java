@@ -5,28 +5,35 @@ import com.project.linkSharing.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 @Controller
-public class EmailVerificationController {
+public class EditProfileController {
 
     @Autowired
     HttpSession session;
     @Autowired
     UserService userService;
-    String password_token;
 
-    @GetMapping("/emailVerification")
+    @GetMapping("/editProfile")
     public String display(){
-        return "emailVerification";
+        return "editProfile";
     }
 
-    @PostMapping("/resetPassword")
+    @PostMapping("/changeProfile")
+    public String displayProfile(HttpServletRequest httpServletRequest){
+        User user = (User)session.getAttribute("user");
+        user.setFirstName(httpServletRequest.getParameter("firstName"));
+        user.setLastName(httpServletRequest.getParameter("lastName"));
+        user.setUsername(httpServletRequest.getParameter("username"));
+        userService.saveUser(user);
+        return "editProfile";
+    }
+
+    @PostMapping("/changePassword")
     public String display(HttpServletRequest httpServletRequest){
         String password = httpServletRequest.getParameter("password");
         String confirmPassword = httpServletRequest.getParameter("confirmPassword");
@@ -34,7 +41,10 @@ public class EmailVerificationController {
             User user = (User)session.getAttribute("user");
             user.setPassword(password);
             userService.saveUser(user);
+            return "editProfile";
         }
-        return "login";
+        else{
+            return "login";
+        }
     }
 }

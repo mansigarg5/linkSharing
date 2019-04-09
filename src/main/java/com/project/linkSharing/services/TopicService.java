@@ -21,6 +21,10 @@ public class TopicService {
         return topicRepository.findAll();
     }
 
+    public Integer countTopicByCreatedBy(String createdBy){
+        return topicRepository.countByCreatedBy(createdBy);
+    }
+
     public List<String> listPublicTopicName(){
         return topicRepository.findByVisibility("public");
     }

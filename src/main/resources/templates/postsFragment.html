@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" th:href="@{https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css}">
+    <link rel="stylesheet" th:href="@{https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css}">
+    <script th:src="@{//ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js}"></script>
+    <script th:src="@{//maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js}"></script>
+    <title>Subscription Fragment</title>
+</head>
+<body>
+<div th:fragment="posts">
+    <div class="panel panel-default" style="margin-top:15px;">
+        <div class="panel-heading bg-primary">Posts</div>
+        <div class="panel-body">
+            <div>
+                <div class="col-md-2">
+                    <img th:src="@{/images/TTN-logo.jpg}" alt="image-icon" class="img-thumbnail">
+                </div>
+                <span class="col-md-3" style="margin-left:-15px;">Mansi garg</span>
+                <span class="col-md-5" style="opacity:0.5;">@mansi</span>
+                <span><a>Java</a></span>
+                <br><br>
+                <div class="input-group-btn first">
+                    <button class="btn btn-default"><i class="fa fa-facebook-square" aria-hidden="true"></i></button>
+                    <button class="btn btn-default"><i class="fa fa-twitter" aria-hidden="true"></i></button>
+                    <button class="btn btn-default"><i class="fa fa-google-plus" aria-hidden="true"></i></button>
+                </div>
+                <div class="second">
+                    <a th:href="@{login}">Download</a>
+                    <a th:href="@{login}">View full site</a>
+                    <a th:href="@{login}">Mark as read</a>
+                    <a th:href="@{login}">View post</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

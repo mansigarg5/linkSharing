@@ -1,9 +1,11 @@
 package com.project.linkSharing.controllers;
 
 import com.project.linkSharing.entities.Resources;
+import com.project.linkSharing.entities.Subscription;
 import com.project.linkSharing.entities.Topic;
 import com.project.linkSharing.entities.User;
 import com.project.linkSharing.services.ResourcesService;
+import com.project.linkSharing.services.SubscriptionService;
 import com.project.linkSharing.services.TopicService;
 import com.project.linkSharing.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,6 +28,8 @@ public class LoginController {
     ResourcesService resourcesService;
     @Autowired
     HttpSession session;
+    @Autowired
+    SubscriptionService subscriptionService;
 
     @GetMapping("/")
     public ModelAndView display1(){
@@ -48,12 +52,20 @@ public class LoginController {
         session.setAttribute("user", user);
         if(user.getUsername().equals(username) && user.getPassword().equals(password)){
             List<Topic> topicList = topicService.listTopics();
+            List<Subscription> subscriptionList = subscriptionService.listSubscriptionByUserid(user.getId());
+            Integer postCount = topicService.countTopicByCreatedBy(user.getUsername());
+            Integer subscriptionCount = subscriptionService.countSubscription(user.getId());
             return new ModelAndView("dashboard")
-                    .addObject("topicList", topicList);
+                    .addObject("topicList", topicList)
+                    .addObject("subscriptionList", subscriptionList)
+                    .addObject("subscriptionCount", subscriptionCount)
+                    .addObject("postCount", postCount);
 //                    .addObject("image", "/images/"+ user1.getFirstName() + ".jpeg");
         }
         else {
-            return new ModelAndView("login");
+            List<String> publicTopicNameList = topicService.listPublicTopicName();
+            List<Resources> resourcesList = resourcesService.listPublicResources(publicTopicNameList);
+            return new ModelAndView("login").addObject("resourcesList", resourcesList);
         }
     }
 }

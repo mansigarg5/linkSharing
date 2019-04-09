@@ -14,7 +14,7 @@ public class Topic {
     private Integer id;
     private String name;
     private String visibility;
-    private String seriousness;
+//    private String seriousness;
     private String createdBy;
     private Date date;
 
@@ -41,14 +41,14 @@ public class Topic {
     public void setVisibility(String visibility) {
         this.visibility = visibility;
     }
-
-    public String getSeriousness() {
-        return seriousness;
-    }
-
-    public void setSeriousness(String seriousness) {
-        this.seriousness = seriousness;
-    }
+//
+//    public String getSeriousness() {
+//        return seriousness;
+//    }
+//
+//    public void setSeriousness(String seriousness) {
+//        this.seriousness = seriousness;
+//    }
 
     public String getCreatedBy() {
         return createdBy;

@@ -15,35 +15,24 @@
         <div class="col-md-5">
             <div class="row">
                 <div class="col-md-12">
-                    <img th:src="@{/images/TTN-logo.jpg}" style="width: 75px; height: 75px">
-                    <span th:text="*{firstName}"></span>
-                    <span th:text="*{lastName}"></span><br>
-                    <span th:text="*{username}"></span>
-                    <table>
-                        <tr>
-                            <th>Subscriptions</th>
-                            <th>Topics</th>
-                        </tr>
-                        <tr>
-                            <td>50</td>
-                            <td>30</td>
-                        </tr>
-                    </table>
-
+                    <div th:include="userInfoFragment::userinfo"></div>
                 </div>
             </div>
             <div class="row">
                 <div class="col-md-12">
+                    <div th:include="topicFragment::topic"></div>
                 </div>
             </div>
             <div class="row">
                 <div class="col-md-12">
+                    <div th:include="subscriptionFragment::subscriptions"></div>
                 </div>
             </div>
         </div>
         <div class="col-md-7">
             <div class="row">
                 <div class="col-md-12">
+                    <div th:include="postsFragment::posts"></div>
                 </div>
             </div>
         </div>

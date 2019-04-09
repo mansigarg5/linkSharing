@@ -10,53 +10,29 @@
         <title>Edit Profile</title>
     </head>
     <body>
-    <div th:object="${user}" class="container-fluid">
+    <div class="container-fluid">
         <div class="row">
-            <div class="col-md-5">
+            <div class="col-md-6">
                 <div class="row">
                     <div class="col-md-12">
-                        <img th:src="@{/images/TTN-logo.jpg}" style="width: 75px; height: 75px">
-                        <span th:text="*{firstName}"></span>
-                        <span th:text="*{lastName}"></span><br>
-                        <span th:text="*{username}"></span>
-                        <table>
-                            <tr>
-                                <th>Subscriptions</th>
-                                <th>Topics</th>
-                            </tr>
-                            <tr>
-                                <td>50</td>
-                                <td>30</td>
-                            </tr>
-                        </table>
+                        <div th:include="userInfoFragment::userinfo"></div>
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-md-12">
+                        <div th:include="topicFragment::topic"></div>
                     </div>
                 </div>
             </div>
-            <div class="col-md-7">
+            <div class="col-md-6">
                 <div class="row">
                     <div class="col-md-12">
-                        <form action="#" th:action="@{/saveTopic}" th:object="${user}" method="post">
-                            First Name: <input type="text" required="required" th:field="*{firstName}"><br>
-                            Last Name: <input type="text" required="required" th:field="*{lastName}"><br>
-                            Username: <input type="text" required="required" th:field="*{username}"><br>
-                            Password: <input type="text" required="required" th:field="*{password}"><br>
-                            Photo: <input type="text" required="required" th:field="*{firstName}">
-                            <input type="file"><br>
-                            <button type="submit" class="btn btn-primary" style="float: right">Update</button>
-                        </form>
+                        <div th:include="changeProfileFragment::changeProfile"></div>
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-md-12">
-                        <form action="#" th:action="@{/saveTopic}" th:object="${user}" method="post">
-                            Password: <input type="text" required="required" th:field="*{password}"><br>
-                            Confirm Password: <input type="text" required="required" name="password"><br>
-                            <button type="submit" class="btn btn-primary" style="float: right">Update</button>
-                        </form>
+                        <div th:include="changePasswordFragment::changePassword"></div>
                     </div>
                 </div>
             </div>

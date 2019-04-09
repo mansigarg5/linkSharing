@@ -6,6 +6,7 @@
         <link rel="stylesheet" th:href="@{https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css}">
         <script th:src="@{//ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js}"></script>
         <script th:src="@{//maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js}"></script>
+        <script th:src="@{/js/TableJS.js}"></script>
         <title>User Fragment</title>
     </head>
     <body>
@@ -35,17 +36,17 @@
                                             <h4 class="modal-title">Create Topic</h4>
                                         </div>
                                         <div class="modal-body">
-                                            Name: <input type="text" required="required" name="name"><br><br>
+                                            Name: <input id="name" type="text" required="required" name="name"><br><br>
                                             Visibility:
                                             <div class="dropdown first">
-                                                <select class="btn btn-default" name="visibility">
+                                                <select id="visibility" class="btn btn-default" name="visibility">
                                                     <option value="Private">Private</option>
                                                     <option value="Public">Public</option>
                                                 </select>
                                             </div><br>
                                         </div>
                                         <div class="modal-footer">
-                                            <button type="submit" class="btn btn-primary" >Save</button>
+                                            <button id="createTopic" type="submit" class="btn btn-primary" >Save</button>
                                             <button type="button" class="btn btn-primary" data-dismiss="modal">Cancel</button>
                                         </div>
                                     </form>
@@ -84,7 +85,7 @@
                         </div>
 
 
-                        <button type="button" class="btn btn-primary btn-info" data-toggle="modal" data-target="#create-link-modal">
+                        <button id="createLink" type="button" class="btn btn-primary btn-info" data-toggle="modal" data-target="#create-link-modal">
                                 <i class="fa fa-link" aria-hidden="true"></i>
                             </button>
 
@@ -169,10 +170,10 @@
                                 <i class="fa fa-user fa-lg" aria-hidden="true"></i>
                             </button>
                             <ul class="dropdown-menu">
-                                <li><a href="editProfile">Profile</a></li>
-                                <li><a href="users">Users</a></li>
-                                <li><a href="topic">Topics</a></li>
-                                <li><a href="post">Posts</a></li>
+                                <li><a th:href="@{editProfile}">Profile</a></li>
+                                <li><a th:href="@{users}">Users</a></li>
+                                <li><a th:href="@{topic}">Topics</a></li>
+                                <li><a th:href="@{posts}">Posts</a></li>
                                 <li class="divider"></li>
                                 <li><a th:href="@{/logout}">Logout</a></li>
                             </ul>

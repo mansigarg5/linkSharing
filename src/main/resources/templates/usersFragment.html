@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" th:href="@{https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css}">
+    <link rel="stylesheet" th:href="@{https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css}">
+    <script th:src="@{//ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js}"></script>
+    <script th:src="@{//maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js}"></script>
+    <script th:src="@{/js/TableJS.js}"></script>
+    <script th:src="@{/js/dashboard.js}"></script>
+    <title>User Info</title>
+    <style>
+        .first{
+            display: inline;
+        }
+        .second{
+            float: right;
+        }
+    </style>
+</head>
+<body>
+<div th:fragment="users">
+    <div class="panel panel-default" style="margin-top:15px;">
+        <div class="panel-body">
+            <div>
+                <div class="col-md-2">
+                    <img th:src="@{/images/TTN-logo.jpg}" alt="image-icon" class="img-thumbnail">
+                </div>
+                <div style="margin-left:-15px;">
+                    <div class="col-md-3"  th:text="${session.user.firstName}"></div><br>
+                    <div class="col-md-3" style="opacity:0.5;" th:text="${session.user.username}"></div>
+                    <br><br>
+                    <table>
+                        <tr>
+                            <th>Subscriptions</th>
+                            <th>Topics</th>
+                        </tr>
+                        <tr>
+                            <td><a th:text="${subscriptionCount}"></a></td>
+                            <td><a th:text="${postCount}"></a></td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

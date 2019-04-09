@@ -40,9 +40,6 @@ public class EmailService {
             passwordResetEmail.setSubject("Password Reset Request");
             passwordResetEmail.setText("Please click on the link below to reset your password:" +
                     "\nhttp://localhost:8080/emailVerification");
-
-//            MimeBodyPart messageBodyPart = new MimeBodyPart();
-//            messageBodyPart.setContent("<a>http://localhost:8080/emailVerification</a>", "text/html");
             emailUtil.sendEmail(passwordResetEmail);
 
 
@@ -54,5 +51,18 @@ public class EmailService {
             redirectAttributes.addFlashAttribute("alertClass", "alert-success");
             return "emailVerification";
         }
+    }
+
+    public void sendInvite(String email, String relatedTopic, RedirectAttributes redirectAttributes) throws MessagingException {
+//        User user = (User)session.getAttribute("user");
+        SimpleMailMessage sendInviteEmail = new SimpleMailMessage();
+        sendInviteEmail.setTo(email);
+        sendInviteEmail.setSubject("Invitation Link");
+        sendInviteEmail.setText("Mansi has invited you to subscribe the topic " + relatedTopic);
+//        sendInviteEmail.setText(user.getFirstName() +" "+ user.getLastName() +
+//                "has invited you to subscribe the topic " + relatedTopic);
+        emailUtil.sendEmail(sendInviteEmail);
+        redirectAttributes.addFlashAttribute("message", "A link to invite has been sent to " + email);
+        redirectAttributes.addFlashAttribute("alertClass", "alert-success");
     }
 }

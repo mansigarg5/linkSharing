@@ -2,13 +2,15 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <script type = "text/javascript" th:src = "@{/js/TableJS.js}" ></script>
-    <link th:href="@{/css/TableCSS.css}" rel="stylesheet" type="text/css">
+    <!--<script type = "text/javascript" th:src = "@{/js/TableJS.js}" ></script>-->
+    <!--<link th:href="@{/css/TableCSS.css}" rel="stylesheet" type="text/css">-->
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" th:href="@{https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css}">
     <link rel="stylesheet" th:href="@{https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css}">
     <script th:src="@{//ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js}"></script>
     <script th:src="@{//maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js}"></script>
+    <script th:src="@{/css/TableCSS.css}"></script>
+    <script th:src="@{/js/TableJS.js}"></script>
     <title>Users</title>
 </head>
 <body>
@@ -33,15 +35,15 @@
     </tr>
     </thead>
     <tbody>
-    <th:block th:each="user,i:${userList}">
+    <th:block th:each="user:${userList}">
         <tr>
-            <td th:text="${user.getId()}"></td>
-            <td th:text="${user.getUsername()}"></td>
-            <td th:text="${user.getEmail()}"></td>
-            <td th:text="${user.getFirstName()}"></td>
-            <td th:text="${user.getLastName()}"></td>
-            <td th:text="${user.getActive()}"></td>
-            <td th:text="${user.getManage()}"></td>
+            <td th:text="${user.id}"></td>
+            <td th:text="${user.username}"></td>
+            <td th:text="${user.email}"></td>
+            <td th:text="${user.firstName}"></td>
+            <td th:text="${user.lastName}"></td>
+            <td>Active</td>
+            <td>Manage</td>
         </tr>
     </th:block>
     </tbody>

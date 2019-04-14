@@ -10,6 +10,10 @@
     <title>Topic</title>
 </head>
 <body>
+<div th:with="var=${session.user}">
+    <span th:if="${var}"><div th:include="userFragment::header"></div></span>
+    <span th:unless="${var}"><div th:include="fragment::header"></div></span>
+</div>
 <div class="container-fluid">
     <div class="row">
         <div class="col-md-5">
@@ -35,3 +39,4 @@
 </div>
 </body>
 </html>
+

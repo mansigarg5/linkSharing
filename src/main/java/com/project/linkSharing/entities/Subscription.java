@@ -1,36 +1,77 @@
 package com.project.linkSharing.entities;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import com.project.linkSharing.enums.Seriousness;
+
+import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
+//@NamedNativeQuery(name = "Subscription.findByUser",
+//        query = "SELECT * from Subscription where user = :user",
+//        resultClass = Subscription.class)
 public class Subscription {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-    private Integer userid;
-    private Integer topicid;
-    private String visibility;
-    private String seriousness;
+    @ManyToOne
+    private User user;
+    @ManyToOne
+    private Topic topic;
+//    private Integer userid;
+//    private Integer topicid;
+//    private String visibility;
+//    private Seriousness seriousness;
 
-    public Integer getUserid() {
-        return userid;
+//    public Integer getUserid() {
+//        return userid;
+//    }
+//
+//    public void setUserid(Integer userid) {
+//        this.userid = userid;
+//    }
+//
+//    public Integer getTopicid() {
+//        return topicid;
+//    }
+//
+//    public void setTopicid(Integer topicid) {
+//        this.topicid = topicid;
+//    }
+
+    public User getUser() {
+        return user;
     }
 
-    public void setUserid(Integer userid) {
-        this.userid = userid;
+    public void setUser(User user) {
+        this.user = user;
     }
 
-    public Integer getTopicid() {
-        return topicid;
+    public Topic getTopic() {
+        return topic;
     }
 
-    public void setTopicid(Integer topicid) {
-        this.topicid = topicid;
+    public void setTopic(Topic topic) {
+        this.topic = topic;
     }
+
+
+//    public List<User> getUser() {
+//        return userList;
+//    }
+//
+//    public void setUser(List<User> userList) {
+//        this.userList = userList;
+//    }
+//
+//    public List<Topic> getTopic() {
+//        return topicList;
+//    }
+//
+//    public void setTopic(List<Topic> topic) {
+//        this.topicList = topic;
+//    }
+
 
     public Integer getId() {
         return id;
@@ -40,19 +81,19 @@ public class Subscription {
         this.id = id;
     }
 
-    public String getVisibility() {
-        return visibility;
-    }
+//    public String getVisibility() {
+//        return visibility;
+//    }
+//
+//    public void setVisibility(String visibility) {
+//        this.visibility = visibility;
+//    }
 
-    public void setVisibility(String visibility) {
-        this.visibility = visibility;
-    }
-
-    public String getSeriousness() {
-        return seriousness;
-    }
-
-    public void setSeriousness(String seriousness) {
-        this.seriousness = seriousness;
-    }
+//    public Seriousness getSeriousness() {
+//        return seriousness;
+//    }
+//
+//    public void setSeriousness(Seriousness seriousness) {
+//        this.seriousness = seriousness;
+//    }
 }

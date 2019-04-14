@@ -1,9 +1,8 @@
 package com.project.linkSharing.entities;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import org.springframework.web.multipart.MultipartFile;
+
+import javax.persistence.*;
 import java.util.Date;
 
 @Entity
@@ -12,11 +11,19 @@ public class Resources {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     private String link;
-    private String document;
+    @Transient
+    private MultipartFile document;
+    private String documentName;
     private String description;
-    private String relatedTopic;
-    private String createdBy;
+    @ManyToOne(cascade = CascadeType.REMOVE)
+    private Topic topic;
+    @ManyToOne
+    private User user;
     private Date date;
+    private int markAsRead;
+//    private String relatedTopic;
+//    private String createdBy;
+
 
     public Integer getId() {
         return id;
@@ -34,20 +41,60 @@ public class Resources {
         this.link = link;
     }
 
-    public String getDocument() {
+    public MultipartFile getDocument() {
         return document;
     }
 
-    public void setDocument(String document) {
+    public void setDocument(MultipartFile document) {
         this.document = document;
     }
 
-    public String getRelatedTopic() {
-        return relatedTopic;
+    public String getDocumentName() {
+        return documentName;
     }
 
-    public void setRelatedTopic(String relatedTopic) {
-        this.relatedTopic = relatedTopic;
+    public void setDocumentName(String documentName) {
+        this.documentName = documentName;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+    public int getMarkAsRead() {
+        return markAsRead;
+    }
+
+    public void setMarkAsRead(int markAsRead) {
+        this.markAsRead = markAsRead;
+    }
+
+//    public String getRelatedTopic() {
+//        return relatedTopic;
+//    }
+//
+//    public void setRelatedTopic(String relatedTopic) {
+//        this.relatedTopic = relatedTopic;
+//    }
+    public Date getDate() {
+    return date;
+}
+
+    public void setDate(Date date) {
+        this.date = date;
+    }
+
+
+    public Topic getTopic() {
+        return topic;
+    }
+
+    public void setTopic(Topic topic) {
+        this.topic = topic;
     }
 
     public String getDescription() {
@@ -58,19 +105,27 @@ public class Resources {
         this.description = description;
     }
 
-    public String getCreatedBy() {
-        return createdBy;
-    }
+//    public String getCreatedBy() {
+//        return createdBy;
+//    }
+//
+//    public void setCreatedBy(String createdBy) {
+//        this.createdBy = createdBy;
+//    }
 
-    public void setCreatedBy(String createdBy) {
-        this.createdBy = createdBy;
-    }
 
-    public Date getDate() {
-        return date;
-    }
-
-    public void setDate(Date date) {
-        this.date = date;
+    @Override
+    public String toString() {
+        return "Resources{" +
+                "id=" + id +
+                ", link='" + link + '\'' +
+                ", document=" + document +
+                ", documentName='" + documentName + '\'' +
+                ", description='" + description + '\'' +
+                ", topic=" + topic +
+                ", user=" + user +
+                ", date=" + date +
+                ", markAsRead=" + markAsRead +
+                '}';
     }
 }

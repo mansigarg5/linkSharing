@@ -21,19 +21,22 @@ public class UserService {
     private static final String dirpath = "/home/ttn/linkSharing/src/main/resources/static/images";
 
     public User saveUser(User user) {
-
-//        Path path = Paths.get(dirpath, user.getFirstName() + ".jpeg");
-//        try {
-//            path = Files.write(path, user.getImage().getBytes());
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        }
-//        user.setFileName(path.toString());
-
+        userRepository.save(user);
+        Path path = Paths.get(dirpath, user.getId() + ".jpeg");
+        try {
+            path = Files.write(path, user.getImage().getBytes());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        user.setFileName(path.toString());
         return userRepository.save(user);
     }
 
-    public User getUserByUsernameAndPassword(String username, String password){
+    public User saveUpdatedUser(User user){
+        return userRepository.save(user);
+    }
+
+    public Optional<User> getUserByUsernameAndPassword(String username, String password){
         return userRepository.findByUsernameAndPassword(username, password);
     }
 
@@ -45,6 +48,10 @@ public class UserService {
         return userRepository.findByEmail(email);
     }
 
+    public Optional<User> getUserByResetToken(String resetToken){
+        return userRepository.findByResetToken(resetToken);
+    }
+
     public User getUserByName(String name){
         return userRepository.findByFirstName(name);
     }
@@ -53,6 +60,11 @@ public class UserService {
         return userRepository.findAll();
     }
 
+    public Optional<User> findUserById(Integer userId){
+        return userRepository.findById(userId);
+    }
 
-
+    public User findUserByUsername(String username){
+        return userRepository.findByUsername(username);
+    }
 }

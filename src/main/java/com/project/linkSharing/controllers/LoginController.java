@@ -1,11 +1,9 @@
 package com.project.linkSharing.controllers;
 
 import com.project.linkSharing.entities.Resources;
-import com.project.linkSharing.entities.Subscription;
 import com.project.linkSharing.entities.Topic;
 import com.project.linkSharing.entities.User;
 import com.project.linkSharing.services.ResourcesService;
-import com.project.linkSharing.services.SubscriptionService;
 import com.project.linkSharing.services.TopicService;
 import com.project.linkSharing.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,6 +14,7 @@ import org.springframework.web.servlet.ModelAndView;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.util.List;
+import java.util.Optional;
 
 @Controller
 public class LoginController {
@@ -28,44 +27,57 @@ public class LoginController {
     ResourcesService resourcesService;
     @Autowired
     HttpSession session;
-    @Autowired
-    SubscriptionService subscriptionService;
 
     @GetMapping("/")
-    public ModelAndView display1(){
-        List<String> publicTopicNameList = topicService.listPublicTopicName();
-        List<Resources> resourcesList = resourcesService.listPublicResources(publicTopicNameList);
-        return new ModelAndView("login").addObject("resourcesList", resourcesList);
+    public String display1() {
+//        resourcesService.countMaxResourcesByTopic();
+        if (session.getAttribute("user") != null) {
+            return "redirect:/dashboard";
+        }
+        return "redirect:/login";
     }
+
     @GetMapping("/login")
-    public ModelAndView display(){
-        List<String> publicTopicNameList = topicService.listPublicTopicName();
-        List<Resources> resourcesList = resourcesService.listPublicResources(publicTopicNameList);
+    public ModelAndView display() {
+        List<Topic> publicTopicList = topicService.listPublicTopic();
+        List<Resources> resourcesList = resourcesService.listPublicResources(publicTopicList);
         return new ModelAndView("login").addObject("resourcesList", resourcesList);
     }
 
     @PostMapping("/login")
-    public ModelAndView submit(HttpServletRequest httpServletRequest){
+    public String submit(HttpServletRequest httpServletRequest) {
         String username = httpServletRequest.getParameter("username");
         String password = httpServletRequest.getParameter("password");
-        User user = userService.getUserByUsernameAndPassword(username, password);
-        session.setAttribute("user", user);
-        if(user.getUsername().equals(username) && user.getPassword().equals(password)){
-            List<Topic> topicList = topicService.listTopics();
-            List<Subscription> subscriptionList = subscriptionService.listSubscriptionByUserid(user.getId());
-            Integer postCount = topicService.countTopicByCreatedBy(user.getUsername());
-            Integer subscriptionCount = subscriptionService.countSubscription(user.getId());
-            return new ModelAndView("dashboard")
-                    .addObject("topicList", topicList)
-                    .addObject("subscriptionList", subscriptionList)
-                    .addObject("subscriptionCount", subscriptionCount)
-                    .addObject("postCount", postCount);
-//                    .addObject("image", "/images/"+ user1.getFirstName() + ".jpeg");
+        Optional<User> optional = userService.getUserByUsernameAndPassword(username, password);
+        if (optional.isPresent()) {
+            User user = optional.get();
+            session.setAttribute("user", user);
+            if (user.getUsername().equals(username) && user.getPassword().equals(password)) {
+                return "redirect:/dashboard";
+            }
+            else {
+                return "redirect:/login";
+            }
         }
         else {
-            List<String> publicTopicNameList = topicService.listPublicTopicName();
-            List<Resources> resourcesList = resourcesService.listPublicResources(publicTopicNameList);
+            return "redirect:/login";
+        }
+    }
+
+    @PostMapping("/search")
+    public ModelAndView searchTopic(HttpServletRequest httpServletRequest){
+        String name = httpServletRequest.getParameter("search");
+        System.out.println("name is :" + name);
+        List<Topic> topicList = topicService.findAllTopicByName(name);
+        if(topicList.get(0)==null){
+            List<Topic> publicTopicList = topicService.listPublicTopic();
+            List<Resources> resourcesList = resourcesService.listPublicResources(publicTopicList);
             return new ModelAndView("login").addObject("resourcesList", resourcesList);
+        }
+        else{
+            List<Resources> resourcesList = resourcesService.findResourcesByTopicName(topicList);
+            return new ModelAndView("search").addObject("topicList", topicList)
+                    .addObject("resourcesList", resourcesList);
         }
     }
 }

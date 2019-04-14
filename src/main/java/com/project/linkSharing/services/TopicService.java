@@ -1,11 +1,14 @@
 package com.project.linkSharing.services;
 
 import com.project.linkSharing.entities.Topic;
+import com.project.linkSharing.entities.User;
+import com.project.linkSharing.enums.Visibility;
 import com.project.linkSharing.repositories.TopicRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class TopicService {
@@ -18,14 +21,42 @@ public class TopicService {
     }
 
     public List<Topic> listTopics(){
-        return topicRepository.findAll();
+        return topicRepository.findAllByOrderByName();
     }
 
-    public Integer countTopicByCreatedBy(String createdBy){
-        return topicRepository.countByCreatedBy(createdBy);
+    public Topic findTopicByName(String name){
+        return topicRepository.findByName(name);
     }
 
-    public List<String> listPublicTopicName(){
-        return topicRepository.findByVisibility("public");
+    public List<Topic> topicCreatedByUser(User user){
+        return topicRepository.findByUser(user);
     }
+
+    public Integer postCountByUser(User user){
+        return topicRepository.countByUser(user);
+    }
+
+    public Optional<Topic> findTopicById(Integer topicid){
+        return topicRepository.findById(topicid);
+    }
+
+    public Optional<Topic> findTopicByIdAndUser(Integer topicId, User user){
+        return topicRepository.findByIdAndUser(topicId, user);
+    }
+
+    public List<Topic> listPublicTopic(){
+        return topicRepository.findAllByVisibility(Visibility.PUBLIC);
+    }
+
+    public void deleteTopic(Integer topicId){
+        topicRepository.deleteById(topicId);
+    }
+
+    public List<Topic> findAllTopicByName(String name){
+        return topicRepository.findAllByName(name);
+    }
+
+//    public List<Topic> topicListByUser(String username){
+//        return topicRepository.findByCreatedBy(username);
+//    }
 }

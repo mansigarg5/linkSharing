@@ -10,37 +10,47 @@
     <title>Post</title>
 </head>
 <body>
-<div class="container">
+<div th:with="var=${session.user}">
+    <span th:if="${var}"><div th:include="userFragment::header"></div></span>
+    <span th:unless="${var}"><div th:include="fragment::header"></div></span>
+</div>
+<div class="container-fluid">
     <div class="row">
         <div class="col-md-7">
             <div class="panel panel-default" style="margin-top:15px;">
                 <div class="panel-body">
-                    <div>
-                        <div class="col-md-2">
-                            <img th:src="@{/images/TTN-logo.jpg}" alt="image-icon" class="img-thumbnail">
-                        </div>
-                        <span class="col-md-3" style="margin-left:-15px;">Mansi garg</span>
-                        <span class="col-md-5" style="opacity:0.5;">@mansi</span>
-                        <span><a>Java</a></span>
-                        <div>
-                            <span>Kch bhi</span>
-                        </div>
-                        <br><br>
-                        <div class="input-group-btn first">
-                            <button class="btn btn-default"><i class="fa fa-facebook-square" aria-hidden="true"></i></button>
-                            <button class="btn btn-default"><i class="fa fa-twitter" aria-hidden="true"></i></button>
-                            <button class="btn btn-default"><i class="fa fa-google-plus" aria-hidden="true"></i></button>
+                    <div class="col-md-3" style="padding: 0px">
+                        <img th:src="@{'/images/' + ${resources.user.id} + '.jpeg'}" alt="image-icon" class="img-thumbnail">
+                    </div>
+                    <div class="col-md-9">
+                        <div class="row">
+                            <span class="col-md-3" th:text="${resources.user.firstName} + ' ' + ${resources.user.lastName}"></span>
+                            <span class="col-md-5" style="opacity:0.5;" th:text="${resources.user.username}"></span>
+                            <span><a th:text="${resources.topic.name}"></a></span>
                         </div>
                         <div>
-                            <a th:href="@{login}">Download</a>
-                            <a th:href="@{login}">View full site</a>
-                            <a th:href="@{login}">Mark as read</a>
-                            <a th:href="@{login}">View post</a>
+                            <span th:text="${resources.description}"></span>
+                        </div>
+                        <div class="row" style="display: flex">
+                            <div class="col-md-5s">
+                                <button class="btn btn-default"><i class="fa fa-facebook-square" aria-hidden="true"></i></button>
+                                <button class="btn btn-default"><i class="fa fa-twitter" aria-hidden="true"></i></button>
+                                <button class="btn btn-default"><i class="fa fa-google-plus" aria-hidden="true"></i></button>
+                            </div>
+                            <div class="col-md-7" style="display: flex; align-items: center" th:with="var=${resources.link}">
+                                <span th:if="${var}">
+                                    <a th:href="@{${resources.link}}" target="_blank" style="margin-right: 8px">View full site</a>
+                                </span>
+                                <span th:unless="${var}">
+                                    <a th:href="@{'/documents/' + ${resources.id} + '.txt'}" style="margin-right: 8px" download>Download</a>
+                                </span>
+                                <!--<a th:href="@{login}"  style="margin-right: 8px">Mark as read</a>-->
+                                <!--<a th:href="@{'/post/' + ${resources.id}}">View post</a>-->
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
-
         </div>
         <div class="col-md-5">
             <div th:include="trendingTopicsFragment::trendingTopics"></div>

@@ -1,21 +1,26 @@
 package com.project.linkSharing.entities;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import com.project.linkSharing.enums.Seriousness;
+import com.project.linkSharing.enums.Visibility;
+
+import javax.persistence.*;
 import java.util.Date;
 
 @Entity
 public class Topic {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     private String name;
-    private String visibility;
-//    private String seriousness;
-    private String createdBy;
+    private Visibility visibility;
+    private Seriousness seriousness;
+    @ManyToOne
+    private User user;
+//    @OneToMany(mappedBy = "topic")
+//    private List<Subscription> subscriptions = new ArrayList<>();
+//    @OneToMany(mappedBy = "topic")
+//    private List<Resources> resources = new ArrayList<>();
+    @Temporal(TemporalType.DATE)
     private Date date;
 
     public Integer getId() {
@@ -34,14 +39,23 @@ public class Topic {
         this.name = name;
     }
 
-    public String getVisibility() {
+    public Visibility getVisibility() {
         return visibility;
     }
 
-    public void setVisibility(String visibility) {
+    public void setVisibility(Visibility visibility) {
         this.visibility = visibility;
     }
-//
+
+    public Seriousness getSeriousness() {
+        return seriousness;
+    }
+
+    public void setSeriousness(Seriousness seriousness) {
+        this.seriousness = seriousness;
+    }
+
+    //
 //    public String getSeriousness() {
 //        return seriousness;
 //    }
@@ -50,13 +64,38 @@ public class Topic {
 //        this.seriousness = seriousness;
 //    }
 
-    public String getCreatedBy() {
-        return createdBy;
+
+//    public List<Resources> getResources() {
+//        return resources;
+//    }
+//
+//    public void setResources(List<Resources> resources) {
+//        this.resources = resources;
+//    }
+
+//    public List<Subscription> getSubscriptions() {
+//        return subscriptions;
+//    }
+//
+//    public void setSubscriptions(List<Subscription> subscriptions) {
+//        this.subscriptions = subscriptions;
+//    }
+
+    public User getUser() {
+        return user;
     }
 
-    public void setCreatedBy(String createdBy) {
-        this.createdBy = createdBy;
+    public void setUser(User user) {
+        this.user = user;
     }
+
+//    public String getCreatedBy() {
+//        return createdBy;
+//    }
+//
+//    public void setCreatedBy(String createdBy) {
+//        this.createdBy = createdBy;
+//    }
 
     public Date getDate() {
         return date;

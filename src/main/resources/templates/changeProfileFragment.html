@@ -29,25 +29,20 @@
                 <div>
                     <div class="form-group">
                         <div class="input-group" style="width: 100%">
-                            <input type="text" class="form-control" name="firstName"
-                                   th:value="${session.user.firstName}" required="required" style="border-radius: 4px"/>
+                            <input type="text" class="form-control" th:placeholder="${session.user.firstName}"
+                                   th:value="${session.user.firstName}" name="firstName" style="border-radius: 4px"/>
                         </div>
                         <br>
                         <div class="input-group" style="width: 100%">
-                            <input type="text" class="form-control" name="lastName"
-                                   th:value="${session.user.lastName}" required="required" style="border-radius: 4px"/>
+                            <input type="text" class="form-control" th:placeholder="${session.user.lastName}"
+                                   th:value="${session.user.lastName}" name="lastName" style="border-radius: 4px"/>
                         </div>
                         <br>
                         <div class="input-group" style="width: 100%">
-                            <input type="text" class="form-control" name="username"
-                                   th:value="${session.user.username}" required="required" style="border-radius: 4px"/>
+                            <input type="text" class="form-control" th:placeholder="${session.user.username}"
+                                   th:value="${session.user.username}" name="username" style="border-radius: 4px"/>
                         </div>
                         <br>
-                        <div class="input-group" style="width: 100%">
-                            <input type="text" class="form-control" name="image"
-                                   placeholder="Image" style="border-radius: 4px"/>
-                            <input type="file" class="btn btn-primary login-btn"/>
-                        </div>
                     </div>
                     <div class="form-group">
                         <button type="submit" class="btn btn-primary login-btn btn-block">Update</button>

@@ -12,55 +12,50 @@
 <body>
 <div th:fragment="topic">
     <div class="panel panel-default" style="margin-top:15px;">
-        <div class="panel-heading bg-primary">Trending Posts
-        </div>
+        <div class="panel-heading bg-primary">Topics</div>
         <div class="panel-body">
-            <div>
-                <div class="col-md-2">
-                    <img th:src="@{/images/TTN-logo.jpg}" alt="image-icon" class="img-thumbnail">
+            <div style="margin-bottom: 10px" th:each="topic: ${topicList}">
+            <div class="col-md-3" style="padding: 0px">
+                <img th:src="@{'/images/' + ${topic.user.id} + '.jpeg'}" alt="image-icon" class="img-thumbnail">
+            </div>
+            <div class="col-md-9">
+                <span id="topicId" th:text="${topic.id}" style="visibility: hidden"></span>
+                <div class="col-md-3" id="unsubscribe" th:topic-id="${topic.id}" th:text="${topic.name}"></div><br>
+                <div class="col-md-3" style="opacity:0.5;" id="username" th:text="${topic.user.username}"></div>
+                <br><br>
+                <table>
+                    <tr>
+                        <th>Subscriptions</th>
+                        <th>Topics</th>
+                    </tr>
+                    <tr>
+                        <td><a id="subCount">10</a></td>
+                        <td><a>15</a></td>
+                    </tr>
+                </table>
+                <div class="dropdown first" style="display: inline-block;">
+                    <select id="seriousness" class="btn btn-primary" style="font-size: 12px" name="seriousness">
+                        <option th:each="seriousness : ${T(com.project.linkSharing.enums.Seriousness).values()}"
+                                th:value="${seriousness.getValue()}" th:text="${seriousness.getValue()}"></option>
+                    </select>
                 </div>
-                <div style="margin-left:-15px;">
-                    <div class="col-md-3"  th:text="${session.user.firstName}"></div><br>
-                    <div class="col-md-3" style="opacity:0.5;" th:text="${session.user.username}"></div>
-                    <br><br>
-                    <table>
-                        <tr>
-                            <th>Subscriptions</th>
-                            <th>Topics</th>
-                        </tr>
-                        <tr>
-                            <td><a id="subCount" th:text="${subscriptionCount}"></a></td>
-                            <td><a th:text="${postCount}"></a></td>
-                        </tr>
-                    </table>
-                    <div class="dropdown first">
-                        <select class="btn btn-primary">
-                            <option>Serious</option>
-                            <option>Casual</option>
-                            <option>Very Serious</option>
-                        </select>
-                    </div>
-                    <div class="dropdown first">
-                        <select class="btn btn-primary">
-                            <option>Private</option>
-                            <option>Public</option>
-                        </select>
-                    </div>
-                    <div class="input-group-btn first">
-                        <button class="btn btn-default" type="submit">
-                            <i class="fa fa-envelope" aria-hidden="true"></i>
-                        </button>
-                    </div>
-                    <div class="input-group-btn first">
-                        <button class="btn btn-default" type="submit">
-                            <i class="fa fa-file" aria-hidden="true"></i>
-                        </button>
-                    </div>
-                    <div class="input-group-btn first">
-                        <button class="btn btn-default" type="submit">
-                            <i class="fa fa-trash-o" aria-hidden="true"></i>
-                        </button>
-                    </div>
+                <div class="dropdown first" style="display: inline-block;">
+                    <select id="visibility" class="btn btn-primary" style="font-size: 12px" name="visibility">
+                        <option th:each="visibility : ${T(com.project.linkSharing.enums.Visibility).values()}"
+                                th:value="${visibility.getValue()}" th:text="${visibility.getValue()}"></option>
+                    </select>
+                </div>
+                <div class="input-group-btn first" style="display: inline-block">
+                    <button class="btn btn-default" type="button" style="font-size: 12px"
+                            data-toggle="modal" data-target="#send-invite-modal">
+                        <i class="fa fa-envelope" aria-hidden="true"></i>
+                    </button>
+                    <button class="btn btn-default" type="submit">
+                        <i class="fa fa-file" aria-hidden="true"></i>
+                    </button>
+                    <button class="btn btn-default" type="submit">
+                        <i class="fa fa-trash-o" aria-hidden="true"></i>
+                    </button>
                 </div>
             </div>
         </div>
@@ -68,3 +63,4 @@
 </div>
 </body>
 </html>
+

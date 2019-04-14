@@ -21,20 +21,21 @@ public class EmailVerificationController {
     UserService userService;
     String password_token;
 
-    @GetMapping("/emailVerification")
-    public String display(){
-        return "emailVerification";
-    }
-
-    @PostMapping("/resetPassword")
-    public String display(HttpServletRequest httpServletRequest){
-        String password = httpServletRequest.getParameter("password");
-        String confirmPassword = httpServletRequest.getParameter("confirmPassword");
-        if(password.equals(confirmPassword)){
-            User user = (User)session.getAttribute("user");
-            user.setPassword(password);
-            userService.saveUser(user);
-        }
-        return "login";
-    }
+//    @GetMapping("/resetPassword")
+//    public String display(){
+//        return "emailVerification";
+//    }
+//
+//    @PostMapping("/resetPassword")
+//    public String display(HttpServletRequest httpServletRequest){
+//        String password = httpServletRequest.getParameter("password");
+//        String confirmPassword = httpServletRequest.getParameter("confirmPassword");
+//        if(password.equals(confirmPassword)){
+//            User user = (User)session.getAttribute("user");
+//            user.setPassword(password);
+//            user.setResetToken(null);
+//            userService.saveUser(user);
+//        }
+//        return "login";
+//    }
 }

@@ -23,28 +23,27 @@
 <div th:fragment="userinfo">
     <div class="panel panel-default" style="margin-top:15px;">
         <div class="panel-body">
-            <div>
-                <div class="col-md-2">
-                    <img th:src="@{/images/TTN-logo.jpg}" alt="image-icon" class="img-thumbnail">
-                </div>
-                <div style="margin-left:-15px;">
-                    <div class="col-md-3"  th:text="${session.user.firstName}"></div><br>
-                    <div class="col-md-3" style="opacity:0.5;" th:text="${session.user.username}"></div>
-                    <br><br>
-                    <table>
-                        <tr>
-                            <th>Subscriptions</th>
-                            <th>Topics</th>
-                        </tr>
-                        <tr>
-                            <td><a id="subscriptionCount" th:text="${subscriptionCount}"></a></td>
-                            <td><a th:text="${postCount}"></a></td>
-                        </tr>
-                    </table>
-                </div>
+            <div class="col-md-3" style="padding: 0px">
+                <img th:src="@{'/images/' + ${session.user.id} + '.jpeg'}" alt="image-icon" class="img-thumbnail">
+            </div>
+            <div class="col-md-9">
+                <div class="col-md-3" th:text="${session.user.firstName}"></div><br>
+                <div class="col-md-3" style="opacity:0.5;" th:text="${session.user.username}"></div>
+                <br><br>
+                <table>
+                    <tr>
+                        <th>Subscriptions</th>
+                        <th>Topics</th>
+                    </tr>
+                    <tr>
+                        <td><a th:href="@{/subscriptionCount}" th:text="${subscriptionCount}"></a></td>
+                        <td><a th:href="@{/topicCount}" th:text="${postCount}"></a></td>
+                    </tr>
+                </table>
             </div>
         </div>
     </div>
 </div>
 </body>
 </html>
+

@@ -20,7 +20,7 @@
 <div class="col-sm-4"></div>
 <div class="container">
 <div class="col-sm-4">
-    <form th:action="@{/signup}" th:object="${user}" method="post">
+    <form th:action="@{/signup}" th:object="${user}" method="post" enctype="multipart/form-data">
         <h2 class="text-center">Sign up</h2>
         <div class="form-group">
             <div class="input-group" style="width: 100%">
@@ -63,11 +63,19 @@
         </div>
         <div class="form-group">
             <div class="input-group" style="width: 100%">
-                <input type="file" class="btn btn-primary btn-block" th:field="*{image}" placeholder="Browse">
+                <input th:type="file" class="btn btn-primary btn-block" th:field="*{image}" placeholder="Browse">
             </div>
         </div>
         <div class="form-group">
-            <button href="dashboard"  type="submit" class="btn btn-primary login-btn btn-block">Sign
+            <div class="input-group" style="width: 100%">
+                <select class="form-control" th:field="*{role}">
+                    <option th:each="role : ${T(com.project.linkSharing.enums.Role).values()}"
+                            th:value="${role.getValue()}" th:text="${role.getValue()}"></option>
+                </select>
+            </div>
+        </div>
+        <div class="form-group">
+            <button href="dashboard" type="submit" class="btn btn-primary login-btn btn-block">Sign
                 up</button>
         </div>
     </form>

@@ -11,6 +11,7 @@
     <title>Search</title>
 </head>
 <body>
+<div th:include="fragment::header"></div>
 <div class="container-fluid">
     <div class="row">
         <div class="col-md-5">
@@ -28,53 +29,38 @@
         <div class="col-md-7">
             <div class="row">
                 <div class="col-md-12">
-                    <div class="panel panel-default" style="margin-top: 15px;">
-                        <div class="panel-heading">Recent shares</div>
-                        <div class="panel-body">
-                            <div>
-                                <div class="col-md-2">
-                                    <img
-                                            src="${pageContext.request.contextPath}/resources/images/new.jpg"
-                                            alt="image-icon" class="img-thumbnail">
+                    <div class="panel panel-default" style="margin-top:15px;">
+                        <div class="panel-heading bg-primary">Posts</div>
+                        <div th:each="resources : ${resourcesList}">
+                            <div class="panel-body">
+                                <div class="col-md-3" style="padding: 0px">
+                                    <img th:src="@{'/images/' + ${resources.user.id} + '.jpeg'}" alt="image-icon" class="img-thumbnail">
                                 </div>
-                                <span class="col-md-3" style="margin-left: -15px;">Uday Pratap
-				Singh</span> <span class="col-md-5" style="opacity: 0.5;">@uday 5
-				min</span> <span><a id="grails">Grails</a></span>
-                                <div>
-				<span>Lorem ipsum dolor sit amnet, consectetur adipiscing
-					elit.Something extra text to be displayed</span>
-                                </div>
-                                <div>
-                                    <div class="col-md-2">
-                                        <i class="fa fa-facebook-square" style="margin-left: -15px;"></i> <i
-                                            class="fa fa-tumblr"></i> <i class="fa fa-google-plus"></i>
+                                <div class="col-md-9">
+                                    <div class="row" style="margin-bottom: 10px">
+                                        <span class="col-md-3" th:text="${resources.user.firstName}"></span>
+                                        <span class="col-md-5" style="opacity:0.5;" th:text="${resources.user.username}"></span>
+                                        <span><a th:href="@{'/topic/' + ${resources.topic.name}}" th:text="${resources.topic.name}"></a></span>
                                     </div>
-                                    <span style="margin-left: 295px;"><a>View Post</a></span>
+                                    <div th:text="${resources.description}" style="margin-bottom: 10px"></div>
+                                    <div class="row" style="display: flex">
+                                        <div class="col-md-5">
+                                            <button class="btn btn-default"><i class="fa fa-facebook-square" aria-hidden="true"></i></button>
+                                            <button class="btn btn-default"><i class="fa fa-twitter" aria-hidden="true"></i></button>
+                                            <button class="btn btn-default"><i class="fa fa-google-plus" aria-hidden="true"></i></button>
+                                        </div>
+                                        <div class="col-md-7" style="display: flex; align-items: center" th:with="var=${resources.link}">
+                                            <span th:if="${var}">
+                                                <a th:href="@{${resources.link}}" target="_blank" style="margin-right: 8px">View full site</a>
+                                            </span>
+                                            <span th:unless="${var}">
+                                                <a th:href="@{'/documents/' + ${resources.id} + '.txt'}" style="margin-right: 8px" download>Download</a>
+                                            </span>
+                                            <a th:href="@{'/post/' + ${resources.id}}">View post</a>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
-                            <div>
-
-                                <div class="col-md-2">
-                                    <img
-                                            src="${pageContext.request.contextPath}/resources/images/new.jpg"
-                                            alt="image-icon" class="img-thumbnail">
-                                </div>
-                                <span class="col-md-3" style="margin-left: -15px;">Uday Pratap
-				Singh</span> <span class="col-md-5" style="opacity: 0.5;">@uday 10
-				min</span> <span><a id="grails">Grails</a></span>
-                                <div>
-				<span>Lorem ipsum dolor sit amnet, consectetur adipiscing
-					elit.Something extra text to be displayed</span>
-                                </div>
-                                <div>
-                                    <div class="col-md-2">
-                                        <i class="fa fa-facebook-square" style="margin-left: -15px;"></i> <i
-                                            class="fa fa-tumblr"></i> <i class="fa fa-google-plus"></i>
-                                    </div>
-                                    <span style="margin-left: 295px;"><a>View Post</a></span>
-                                </div>
-                            </div>
-
                         </div>
                     </div>
                 </div>

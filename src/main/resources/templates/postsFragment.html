@@ -7,35 +7,47 @@
     <link rel="stylesheet" th:href="@{https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css}">
     <script th:src="@{//ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js}"></script>
     <script th:src="@{//maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js}"></script>
+    <script th:src="@{/js/dashboard.js}"></script>
     <title>Subscription Fragment</title>
 </head>
 <body>
 <div th:fragment="posts">
     <div class="panel panel-default" style="margin-top:15px;">
         <div class="panel-heading bg-primary">Posts</div>
+        <div th:each="resources : ${resourcesList}">
         <div class="panel-body">
-            <div>
-                <div class="col-md-2">
-                    <img th:src="@{/images/TTN-logo.jpg}" alt="image-icon" class="img-thumbnail">
+            <div class="col-md-3" style="padding: 0px">
+                <img th:src="@{'/images/' + ${resources.user.id} + '.jpeg'}" alt="image-icon" class="img-thumbnail">
+            </div>
+            <div class="col-md-9">
+                <div class="row" style="margin-bottom: 10px">
+                    <span class="col-md-3" th:text="${resources.user.firstName}"></span>
+                    <span class="col-md-5" style="opacity:0.5;" th:text="${resources.user.username}"></span>
+                    <span><a th:href="@{'/topic/' + ${resources.topic.name}}" th:text="${resources.topic.name}"></a></span>
                 </div>
-                <span class="col-md-3" style="margin-left:-15px;">Mansi garg</span>
-                <span class="col-md-5" style="opacity:0.5;">@mansi</span>
-                <span><a>Java</a></span>
-                <br><br>
-                <div class="input-group-btn first">
-                    <button class="btn btn-default"><i class="fa fa-facebook-square" aria-hidden="true"></i></button>
-                    <button class="btn btn-default"><i class="fa fa-twitter" aria-hidden="true"></i></button>
-                    <button class="btn btn-default"><i class="fa fa-google-plus" aria-hidden="true"></i></button>
-                </div>
-                <div class="second">
-                    <a th:href="@{login}">Download</a>
-                    <a th:href="@{login}">View full site</a>
-                    <a th:href="@{login}">Mark as read</a>
-                    <a th:href="@{login}">View post</a>
+                <div th:text="${resources.description}" style="margin-bottom: 10px"></div>
+                <div class="row" style="display: flex">
+                    <div class="col-md-5">
+                        <button class="btn btn-default"><i class="fa fa-facebook-square" aria-hidden="true"></i></button>
+                        <button class="btn btn-default"><i class="fa fa-twitter" aria-hidden="true"></i></button>
+                        <button class="btn btn-default"><i class="fa fa-google-plus" aria-hidden="true"></i></button>
+                    </div>
+                    <div class="col-md-7" style="display: flex; align-items: center" th:with="var=${resources.link}">
+                        <span th:if="${var}">
+                            <a th:href="@{${resources.link}}" target="_blank" style="margin-right: 8px">View full site</a>
+                        </span>
+                        <span th:unless="${var}">
+                            <a th:href="@{'/documents/' + ${resources.id} + '.txt'}" style="margin-right: 8px" download>Download</a>
+                        </span>
+                        <a id="markAsRead" th:resource-id="${resources.id}" style="margin-right: 8px">Mark as read</a>
+                        <a th:href="@{'/post/' + ${resources.id}}">View post</a>
+                    </div>
                 </div>
             </div>
+        </div>
         </div>
     </div>
 </div>
 </body>
 </html>
+

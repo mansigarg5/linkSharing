@@ -1,27 +1,40 @@
 package com.project.linkSharing.entities;
 
-
+import com.project.linkSharing.enums.Role;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.persistence.*;
+import javax.validation.constraints.Email;
 
 @Entity
-public class User {
-
+public class User{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     Integer id;
     private String firstName;
     private String lastName;
+    @Email
     @Column(unique = true)
     private String email;
     @Column(unique = true)
     private String username;
     private String password;
-    private String image;
-//    @Transient
-//    private MultipartFile image;
-//    private String fileName;
+    @Transient
+    private MultipartFile image;
+    private String fileName;
+    private Boolean active;
+    private Boolean verified;
+    private Role role;
+//    @OneToMany(mappedBy = "user")
+//    private List<Topic> topicList = new ArrayList<>();
+//    @OneToMany
+//    private List<Resources> resourcesList = new ArrayList<>();
+//    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+//    private List<Subscription> subscriptions = new ArrayList<>();
+//    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+//    private List<Rating> ratings;
+    private String resetToken;
+
 
     public Integer getId() {
         return id;
@@ -71,28 +84,53 @@ public class User {
         this.password = password;
     }
 
-    public String getImage() {
+    public MultipartFile getImage() {
         return image;
     }
 
-    public void setImage(String image) {
+    public void setImage(MultipartFile image) {
         this.image = image;
     }
-    //    public MultipartFile getImage() {
-//        return image;
-//    }
-//
-//    public void setImage(MultipartFile image) {
-//        this.image = image;
-//    }
-//
-//    public String getFileName() {
-//        return fileName;
-//    }
-//
-//    public void setFileName(String fileName) {
-//        this.fileName = fileName;
-//    }
+
+    public String getFileName() {
+        return fileName;
+    }
+
+    public void setFileName(String fileName) {
+        this.fileName = fileName;
+    }
+
+    public String getResetToken() {
+        return resetToken;
+    }
+
+    public void setResetToken(String resetToken) {
+        this.resetToken = resetToken;
+    }
+
+    public Boolean getActive() {
+        return active;
+    }
+
+    public void setActive(Boolean active) {
+        this.active = active;
+    }
+
+    public Boolean getVerified() {
+        return verified;
+    }
+
+    public void setVerified(Boolean verified) {
+        this.verified = verified;
+    }
+
+    public Role getRole() {
+        return role;
+    }
+
+    public void setRole(Role role) {
+        this.role = role;
+    }
 
     @Override
     public String toString() {
@@ -105,5 +143,4 @@ public class User {
                 ", password='" + password + '\'' +
                 '}';
     }
-
 }

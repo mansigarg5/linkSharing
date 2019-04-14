@@ -11,11 +11,13 @@ import java.util.List;
 
 public interface SubscriptionRepository extends CrudRepository<Subscription, Integer> {
     Subscription save(Subscription subscription);
-    Integer countByUser(User user);
-    List<Subscription> findByUser(User user);
+    Integer countByUserAndTopicIn(User user, List<Topic> topicList);
+    List<Subscription> findByUserAndTopicIn(User user, List<Topic> topicList);
     Subscription findByUserAndTopic(User user, Topic topic);
     void deleteById(Integer id);
     Integer countByTopic(Topic topic);
+    List<Subscription> findAll();
+    List<Subscription> findByTopicIn(List<Topic> topicList);
 //    List<Subscription> findByUser(User user);
 //    @Query("select count(*) from  subscription_user_list where user_id = :user_id")
 //    Integer countByUser(@Param("user_id") Integer userid);

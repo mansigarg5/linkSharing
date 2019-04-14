@@ -70,6 +70,7 @@ public class ResourcesService {
         return resourcesRepository.findAllByTopicIn(topicList);
     }
 
+
 //    public void countMaxResourcesByTopic(){
 //        List<Resources> list = resourcesRepository.countByTopic();
 //        System.out.println(list.get(0).getTopic().getId());

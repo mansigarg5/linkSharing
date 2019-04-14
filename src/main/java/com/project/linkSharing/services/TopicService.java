@@ -21,31 +21,31 @@ public class TopicService {
     }
 
     public List<Topic> listTopics(){
-        return topicRepository.findAllByOrderByName();
+        return topicRepository.findAllByDeleteFlagOrderByName('N');
     }
 
     public Topic findTopicByName(String name){
-        return topicRepository.findByName(name);
+        return topicRepository.findByNameAndDeleteFlag(name, 'N');
     }
 
     public List<Topic> topicCreatedByUser(User user){
-        return topicRepository.findByUser(user);
+        return topicRepository.findByUserAndDeleteFlag(user, 'N');
     }
 
     public Integer postCountByUser(User user){
-        return topicRepository.countByUser(user);
+        return topicRepository.countByUserAndDeleteFlag(user, 'N');
     }
 
     public Optional<Topic> findTopicById(Integer topicid){
-        return topicRepository.findById(topicid);
+        return topicRepository.findByIdAndDeleteFlag(topicid, 'N');
     }
 
     public Optional<Topic> findTopicByIdAndUser(Integer topicId, User user){
-        return topicRepository.findByIdAndUser(topicId, user);
+        return topicRepository.findByIdAndUserAndDeleteFlag(topicId, user, 'N');
     }
 
     public List<Topic> listPublicTopic(){
-        return topicRepository.findAllByVisibility(Visibility.PUBLIC);
+        return topicRepository.findAllByVisibilityAndDeleteFlag(Visibility.PUBLIC, 'N');
     }
 
     public void deleteTopic(Integer topicId){
@@ -53,7 +53,11 @@ public class TopicService {
     }
 
     public List<Topic> findAllTopicByName(String name){
-        return topicRepository.findAllByName(name);
+        return topicRepository.findAllByNameAndDeleteFlag(name, 'N');
+    }
+
+    public List<Topic> findTopicsByName(List<String> name){
+        return topicRepository.findByNameInAndDeleteFlag(name, 'N');
     }
 
 //    public List<Topic> topicListByUser(String username){

@@ -181,7 +181,6 @@
                                 </div>
                             </div>
                         </div>
-
                         <div class="dropdown">
                             <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown">
                                 <i class="fa fa-user fa-lg" aria-hidden="true" style="color: #555"></i>
@@ -190,9 +189,9 @@
                             </button>
                             <ul class="dropdown-menu">
                                 <li><a th:href="@{editProfile}">Profile</a></li>
-                                <li th:if="${session.user.role}=='ADMIN'"><a th:href="@{users}">Users</a></li>
-                                <li th:if="${session.user.role}=='ADMIN'"><a th:href="@{topic}">Topics</a></li>
-                                <li th:if="${session.user.role}=='ADMIN'"><a th:href="@{posts}">Posts</a></li>
+                                <li th:if="${session.user.role}==${session.user.role.ADMIN}"><a th:href="@{users}">Users</a></li>
+                                <li th:if="${session.user.role}==${session.user.role.ADMIN}"><a th:href="@{topics}">Topics</a></li>
+                                <li th:if="${session.user.role}==${session.user.role.ADMIN}"><a th:href="@{posts}">Posts</a></li>
                                 <li class="divider"></li>
                                 <li><a th:href="@{/logout}">Logout</a></li>
                             </ul>

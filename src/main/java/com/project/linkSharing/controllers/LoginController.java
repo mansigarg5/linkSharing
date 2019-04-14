@@ -67,7 +67,6 @@ public class LoginController {
     @PostMapping("/search")
     public ModelAndView searchTopic(HttpServletRequest httpServletRequest){
         String name = httpServletRequest.getParameter("search");
-        System.out.println("name is :" + name);
         List<Topic> topicList = topicService.findAllTopicByName(name);
         if(topicList.get(0)==null){
             List<Topic> publicTopicList = topicService.listPublicTopic();

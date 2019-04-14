@@ -1,22 +1,5 @@
 
-// $(document).ready(function () {
-//         var link = $(this).attr("link");
-//         // $("#downloadLink").toggle(link==null);
-//         $("#fullSiteLink").toggle(link!=null);
-//     if (link==null) {
-//         $("#downloadLink").show();
-//     } else {
-//         $("#downloadLink").hide();
-//     }
-// });
-
-
-
-
 $(document).ready(function () {
-
-    $("#editTextBox").hide();
-    $("#editButton").hide();
 
     $("#unsubscribe").on("click",function () {
         var topicId = $(this).attr("topic-id");
@@ -25,6 +8,7 @@ $(document).ready(function () {
             method: "POST",
             data: {topicId: topicId},
             success: function () {
+                alert("You unsubscribed the post!!");
                 location.reload(true);
             }
         });
@@ -38,6 +22,7 @@ $(document).ready(function () {
             method: "post",
             data: { resourceId : resourceId },
             success: function () {
+                alert("The post is marked as read!!");
                 location.reload(true);
             }
         });
@@ -61,9 +46,6 @@ $(document).ready(function () {
         var seriousness = $(this).val();
         var username = $(this).attr("username");
         var topicId = $(this).attr("topicId");
-        alert(seriousness);
-        alert(username);
-        alert(topicId);
         $.ajax({
             url: "/setSeriousness",
             method: "post",
@@ -92,28 +74,27 @@ $(document).ready(function () {
     });
 
     $("#deleteTopic").on('click', function () {
-        alert("deleting");
         var topicId = $(this).attr("topicId");
-        alert(topicId);
         $.ajax({
             url: "deleteTopic",
             method: "post",
             data: { topicId: topicId },
             success: function () {
                 alert("Topic deleted successfully!!");
+                location.reload(true);
             }
         })
     });
 
     $("#editTopic").on('click', function () {
         $("#topicName").hide();
-        $("#editTextBox").show();
-        $("#editButton").show();
+        var x = document.getElementById("hideElement");
+        x.style.display = "block";
 
     });
 
     $("#editButton").on('click', function () {
-        var oldName = $("#topicName").val();
+        var oldName = $(this).attr("oldName");
         var newName = $("#editTextBox").val();
         $.ajax({
             url: "/editTopicName",
@@ -121,17 +102,59 @@ $(document).ready(function () {
             data: { oldName: oldName, newName: newName},
             success: function () {
                 alert("Topic name changed!!");
-                $("#topicName").show();
-                $("#editTextBox").hide();
-                $("#editButton").hide();
+                location.reload(true);
             }
         })
 
-    })
+    });
 
+    $('select[id="rating"]').on('change', function () {
+        var rating = $(this).val();
+        var resourceId = $(this).attr("resourceId");
+        $.ajax({
+            url: "/setRating",
+            method: "post",
+            data: { resourceId: resourceId, rating: rating},
+            success: function(){
+                alert("Rating changed!!");
+            }
+        })
+    });
 
+    $("#editPost").on('click', function () {
+        $("#description").hide();
+        var post = document.getElementById("hidePost");
+        post.style.display = "block";
 
+    });
 
+    $("#editPostButton").on('click', function () {
+        var resourceId = $(this).attr("resourceId");
+        var newName = $("#editPostTextBox").val();
+        $.ajax({
+            url: "/editPostDescription",
+            method: "post",
+            data: { resourceId: resourceId, newName: newName},
+            success: function () {
+                alert("Post description changed!!");
+                location.reload(true);
+            }
+        })
+
+    });
+
+    $('select[id="activateUser"]').on('change', function () {
+        var activate = $(this).val();
+        var userId = $(this).attr("userId");
+        $.ajax({
+            url: "/activateUser",
+            method: "post",
+            data: { userId: userId, activate: activate},
+            success: function(){
+                alert("User activated/deactivated !!");
+            }
+        })
+    });
 
 });
 

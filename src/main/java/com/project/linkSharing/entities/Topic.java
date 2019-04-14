@@ -11,6 +11,7 @@ public class Topic {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
+    @Column(unique = true)
     private String name;
     private Visibility visibility;
     private Seriousness seriousness;
@@ -22,6 +23,7 @@ public class Topic {
 //    private List<Resources> resources = new ArrayList<>();
     @Temporal(TemporalType.DATE)
     private Date date;
+    private char deleteFlag;
 
     public Integer getId() {
         return id;
@@ -53,6 +55,14 @@ public class Topic {
 
     public void setSeriousness(Seriousness seriousness) {
         this.seriousness = seriousness;
+    }
+
+    public char getDeleteFlag() {
+        return deleteFlag;
+    }
+
+    public void setDeleteFlag(char deleteFlag) {
+        this.deleteFlag = deleteFlag;
     }
 
     //

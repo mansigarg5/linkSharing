@@ -96,7 +96,13 @@ public class SubscriptionController {
     @PostMapping("/deleteTopic")
     @ResponseBody
     public String delete(@RequestParam("topicId") Integer topicId){
-        topicService.deleteTopic(topicId);
+        Optional<Topic> optionalTopic = topicService.findTopicById(topicId);
+        if(optionalTopic.isPresent()){
+            Topic topic = optionalTopic.get();
+            topic.setDeleteFlag('Y');
+            topicService.saveTopic(topic);
+        }
+
         return "true";
     }
 }

@@ -12,15 +12,16 @@ import java.util.Optional;
 
 public interface TopicRepository extends CrudRepository<Topic, Integer> {
     Topic save(Topic topic);
-    List<Topic> findAllByOrderByName();
-    Optional<Topic> findById(Integer id);
+    List<Topic> findAllByDeleteFlagOrderByName(char delete);
+    Optional<Topic> findByIdAndDeleteFlag(Integer id, char delete);
 //    Integer countByCreatedBy(String createdBy);
 //    List<Topic> findByCreatedBy(String username);
-    List<Topic> findAllByVisibility(Visibility visibility);
-    Topic findByName(String name);
-    List<Topic> findByUser(User user);
-    Integer countByUser(User user);
-    Optional<Topic> findByIdAndUser(Integer id, User user);
+    List<Topic> findAllByVisibilityAndDeleteFlag(Visibility visibility, char delete);
+    Topic findByNameAndDeleteFlag(String name, char delete);
+    List<Topic> findByUserAndDeleteFlag(User user, char delete);
+    Integer countByUserAndDeleteFlag(User user, char delete);
+    Optional<Topic> findByIdAndUserAndDeleteFlag(Integer id, User user, char delete);
     void deleteById(Integer id);
-    List<Topic> findAllByName(String name);
+    List<Topic> findAllByNameAndDeleteFlag(String name, char delete);
+    List<Topic> findByNameInAndDeleteFlag(List<String> name, char delete);
 }

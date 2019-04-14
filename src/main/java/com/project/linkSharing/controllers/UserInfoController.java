@@ -27,7 +27,8 @@ public class UserInfoController {
     @GetMapping("/subscriptionCount")
     public ModelAndView display(){
         User user = (User)session.getAttribute("user");
-        List<Subscription> subscriptionList = subscriptionService.subscriptionListByUser(user);
+        List<Topic> topicList = topicService.listTopics();
+        List<Subscription> subscriptionList = subscriptionService.subscriptionListByUser(user, topicList);
         return new ModelAndView("subscription").addObject("subscriptionList", subscriptionList);
     }
 

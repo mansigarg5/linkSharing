@@ -22,8 +22,10 @@
                 <div class="col-md-9">
                     <!--<div class="col-md-3">-->
                         <span id="topicName" th:text="${subscription.topic.name}"></span>
+                    <div id="hideElement" style="display: none">
                         <input id="editTextBox" type="text">
-                        <button id="editButton">Save</button>
+                        <button class="btn btn-primary" id="editButton" th:oldName="${subscription.topic.name}">Save</button>
+                    </div>
                     <!--</div>-->
                     <br>
                     <div class="col-md-3" style="opacity:0.5;"  th:text="${subscription.user.username}"></div>

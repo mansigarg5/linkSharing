@@ -7,6 +7,7 @@
     <link rel="stylesheet" th:href="@{https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css}">
     <script th:src="@{//ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js}"></script>
     <script th:src="@{//maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js}"></script>
+    <script th:src="@{/js/dashboard.js}"></script>
     <title>Post</title>
 </head>
 <body>
@@ -28,8 +29,22 @@
                             <span class="col-md-5" style="opacity:0.5;" th:text="${resources.user.username}"></span>
                             <span><a th:text="${resources.topic.name}"></a></span>
                         </div>
+                        <div style="float: right">
+                            <label style="width: 20%">Rating:</label>
+                            <select th:if="${session.user}" id="rating" class="form-control" th:resourceId="${resources.id}">
+                                <option>1</option>
+                                <option>2</option>
+                                <option>3</option>
+                                <option>4</option>
+                                <option>5</option>
+                            </select>
+                        </div>
                         <div>
-                            <span th:text="${resources.description}"></span>
+                            <span id="description" th:text="${resources.description}"></span>
+                            <div id="hidePost" style="display: none">
+                                <input id="editPostTextBox" type="text">
+                                <button class="btn btn-primary" id="editPostButton" th:resourceId="${resources.id}">Save</button>
+                            </div>
                         </div>
                         <div class="row" style="display: flex">
                             <div class="col-md-5s">
@@ -38,14 +53,15 @@
                                 <button class="btn btn-default"><i class="fa fa-google-plus" aria-hidden="true"></i></button>
                             </div>
                             <div class="col-md-7" style="display: flex; align-items: center" th:with="var=${resources.link}">
+                                <a style="margin-right: 8px">Delete</a>
+                                <a id="editPost" style="margin-right: 8px">Edit</a>
                                 <span th:if="${var}">
                                     <a th:href="@{${resources.link}}" target="_blank" style="margin-right: 8px">View full site</a>
                                 </span>
                                 <span th:unless="${var}">
                                     <a th:href="@{'/documents/' + ${resources.id} + '.txt'}" style="margin-right: 8px" download>Download</a>
                                 </span>
-                                <!--<a th:href="@{login}"  style="margin-right: 8px">Mark as read</a>-->
-                                <!--<a th:href="@{'/post/' + ${resources.id}}">View post</a>-->
+
                             </div>
                         </div>
                     </div>

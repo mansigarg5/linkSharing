@@ -25,12 +25,12 @@ public class SubscriptionService {
     }
 
 
-    public Integer subscriptionCountByUser(User user){
-        return subscriptionRepository.countByUser(user);
+    public Integer subscriptionCountByUser(User user, List<Topic> topicList){
+        return subscriptionRepository.countByUserAndTopicIn(user, topicList);
     }
 
-    public List<Subscription> subscriptionListByUser(User user){
-        return subscriptionRepository.findByUser(user);
+    public List<Subscription> subscriptionListByUser(User user, List<Topic> topicList){
+        return subscriptionRepository.findByUserAndTopicIn(user, topicList);
     }
 
     public Subscription subscriptionByUserAndTopic(User user, Topic topic){
@@ -57,6 +57,16 @@ public class SubscriptionService {
         }
         return responseSubscriptions;
     }
+
+    public List<Subscription> listSubscription(){
+        return subscriptionRepository.findAll();
+    }
+
+    public List<Subscription> listSubscriptionByTopic(List<Topic> topicList){
+        return subscriptionRepository.findByTopicIn(topicList);
+    }
+
+
 //    public List<Subscription> listSubscriptionByUserid(Integer userid){
 //        return subscriptionRepository.findByUserid(userid);
 //    }

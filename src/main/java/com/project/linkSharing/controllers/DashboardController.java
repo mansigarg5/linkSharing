@@ -42,21 +42,22 @@ public class DashboardController {
     public ModelAndView display(){
         if(session.getAttribute("user")!=null){
             User user = (User)session.getAttribute("user");
-//            List<Topic> topicList = topicService.listTopics();
-//            List<Resources> resourcesList = resourcesService.listResources();
+            List<Topic> topicList = topicService.listTopics();
+            List<Resources> allResourcesList = resourcesService.listResources();
             Integer postCount = topicService.postCountByUser(user);
-            Integer subscriptionCount = subscriptionService.subscriptionCountByUser(user);
-            List<Subscription> subscriptionList = subscriptionService.subscriptionListByUser(user);
+            Integer subscriptionCount = subscriptionService.subscriptionCountByUser(user, topicList);
+            List<Subscription> subscriptionList = subscriptionService.subscriptionListByUser(user, topicList);
             List<ResponseSubscription> responseSubscriptions = subscriptionService.postCountByUserAndTopic(subscriptionList);
             List<Resources> resourcesList = resourcesService.listResourcesByMarkAsRead(0);
             return new ModelAndView("dashboard")
-            .addObject("image", "/images/" + user.getUsername() + ".jpeg")
+//            .addObject("image", "/images/" + user.getUsername() + ".jpeg")
 //                    .addObject("topicList", topicList)
                     .addObject("subscriptionList", subscriptionList)
                     .addObject("subscriptionCount", subscriptionCount)
                     .addObject("postCount", postCount)
                     .addObject("resourcesList", resourcesList)
-                    .addObject("responseSubscription", responseSubscriptions);
+                    .addObject("responseSubscription", responseSubscriptions)
+                    .addObject("allResourcesList", allResourcesList);
         }
         else{
             List<Topic> publicTopicList = topicService.listPublicTopic();
@@ -83,6 +84,7 @@ public class DashboardController {
         topic.setUser(user);
         topic.setDate(new Date());
         topic.setSeriousness(Seriousness.VERY_SERIOUS);
+        topic.setDeleteFlag('N');
         topicService.saveTopic(topic);
         Subscription subscription = new Subscription();
         subscription.setUser(user);

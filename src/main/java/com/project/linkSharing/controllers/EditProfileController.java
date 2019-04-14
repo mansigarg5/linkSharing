@@ -3,6 +3,7 @@ package com.project.linkSharing.controllers;
 import com.project.linkSharing.entities.Subscription;
 import com.project.linkSharing.entities.Topic;
 import com.project.linkSharing.entities.User;
+import com.project.linkSharing.response.ResponseSubscription;
 import com.project.linkSharing.services.SubscriptionService;
 import com.project.linkSharing.services.TopicService;
 import com.project.linkSharing.services.UserService;
@@ -35,12 +36,15 @@ public class EditProfileController {
         User user = (User) session.getAttribute("user");
         List<Topic> topicList = topicService.topicCreatedByUser(user);
         Integer postCount = topicService.postCountByUser(user);
-        Integer subscriptionCount = subscriptionService.subscriptionCountByUser(user);
-        List<Subscription> subscriptionList = subscriptionService.subscriptionListByUser(user);
+        Integer subscriptionCount = subscriptionService.subscriptionCountByUser(user, topicList);
+        List<Topic> topicList1 = topicService.listTopics();
+        List<Subscription> subscriptionList = subscriptionService.subscriptionListByUser(user, topicList1);
+        List<ResponseSubscription> responseSubscriptions = subscriptionService.postCountByUserAndTopic(subscriptionList);
         return new ModelAndView("editProfile").addObject("topicList", topicList)
                 .addObject("postCount", postCount)
                 .addObject("subscriptionCount", subscriptionCount)
-                .addObject("subscriptionList", subscriptionList);
+                .addObject("subscriptionList", subscriptionList)
+                .addObject("responseSubscription", responseSubscriptions);
     }
 
     @PostMapping("/changeProfile")

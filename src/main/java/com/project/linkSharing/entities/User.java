@@ -22,8 +22,7 @@ public class User{
     @Transient
     private MultipartFile image;
     private String fileName;
-    private Boolean active;
-    private Boolean verified;
+    private String activate;
     private Role role;
 //    @OneToMany(mappedBy = "user")
 //    private List<Topic> topicList = new ArrayList<>();
@@ -108,21 +107,14 @@ public class User{
         this.resetToken = resetToken;
     }
 
-    public Boolean getActive() {
-        return active;
+    public String getActivate() {
+        return activate;
     }
 
-    public void setActive(Boolean active) {
-        this.active = active;
+    public void setActivate(String activate) {
+        this.activate = activate;
     }
 
-    public Boolean getVerified() {
-        return verified;
-    }
-
-    public void setVerified(Boolean verified) {
-        this.verified = verified;
-    }
 
     public Role getRole() {
         return role;

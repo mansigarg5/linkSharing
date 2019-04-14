@@ -11,6 +11,7 @@
     <script th:src="@{//maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js}"></script>
     <script th:src="@{/css/TableCSS.css}"></script>
     <script th:src="@{/js/TableJS.js}"></script>
+    <script th:src="@{/js/dashboard.js}"></script>
     <title>Users</title>
 </head>
 <body>
@@ -30,8 +31,6 @@
         </th>
         <th class="th-sm">Active
         </th>
-        <th class="th-sm">Manage
-        </th>
     </tr>
     </thead>
     <tbody>
@@ -42,8 +41,12 @@
             <td th:text="${user.email}"></td>
             <td th:text="${user.firstName}"></td>
             <td th:text="${user.lastName}"></td>
-            <td>Active</td>
-            <td>Manage</td>
+            <td>
+                <select id="activateUser" class="form-control" th:userId="${user.id}">
+                    <option>Activate</option>
+                    <option>Deactivate</option>
+                </select>
+            </td>
         </tr>
     </th:block>
     </tbody>

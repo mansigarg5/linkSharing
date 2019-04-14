@@ -14,52 +14,61 @@
     <div class="panel panel-default" style="margin-top:15px;">
         <div class="panel-heading bg-primary">Topics</div>
         <div class="panel-body">
-            <div style="margin-bottom: 10px" th:each="topic: ${topicList}">
-            <div class="col-md-3" style="padding: 0px">
-                <img th:src="@{'/images/' + ${topic.user.id} + '.jpeg'}" alt="image-icon" class="img-thumbnail">
-            </div>
-            <div class="col-md-9">
-                <span id="topicId" th:text="${topic.id}" style="visibility: hidden"></span>
-                <div class="col-md-3" id="unsubscribe" th:topic-id="${topic.id}" th:text="${topic.name}"></div><br>
-                <div class="col-md-3" style="opacity:0.5;" id="username" th:text="${topic.user.username}"></div>
-                <br><br>
-                <table>
-                    <tr>
-                        <th>Subscriptions</th>
-                        <th>Topics</th>
-                    </tr>
-                    <tr>
-                        <td><a id="subCount">10</a></td>
-                        <td><a>15</a></td>
-                    </tr>
-                </table>
-                <div class="dropdown first" style="display: inline-block;">
-                    <select id="seriousness" class="btn btn-primary" style="font-size: 12px" name="seriousness">
-                        <option th:each="seriousness : ${T(com.project.linkSharing.enums.Seriousness).values()}"
-                                th:value="${seriousness.getValue()}" th:text="${seriousness.getValue()}"></option>
-                    </select>
+            <div style="margin-bottom: 10px" th:each="subscription: ${responseSubscription}">
+                <div class="col-md-3" style="padding: 0px">
+                    <img th:src="@{'/images/' + ${subscription.user.id} + '.jpeg'}" alt="image-icon" class="img-thumbnail">
                 </div>
-                <div class="dropdown first" style="display: inline-block;">
-                    <select id="visibility" class="btn btn-primary" style="font-size: 12px" name="visibility">
-                        <option th:each="visibility : ${T(com.project.linkSharing.enums.Visibility).values()}"
-                                th:value="${visibility.getValue()}" th:text="${visibility.getValue()}"></option>
-                    </select>
-                </div>
-                <div class="input-group-btn first" style="display: inline-block">
-                    <button class="btn btn-default" type="button" style="font-size: 12px"
-                            data-toggle="modal" data-target="#send-invite-modal">
-                        <i class="fa fa-envelope" aria-hidden="true"></i>
-                    </button>
-                    <button class="btn btn-default" type="submit">
-                        <i class="fa fa-file" aria-hidden="true"></i>
-                    </button>
-                    <button class="btn btn-default" type="submit">
-                        <i class="fa fa-trash-o" aria-hidden="true"></i>
-                    </button>
+                <div class="col-md-9">
+                    <!--<div class="col-md-3">-->
+                    <span id="topicName" th:text="${subscription.topic.name}"></span>
+                    <input id="editTextBox" type="text">
+                    <button class="btn btn-primary" id="editButton">Save</button>
+                    <!--</div>-->
+                    <br>
+                    <div class="col-md-3" style="opacity:0.5;"  th:text="${subscription.user.username}"></div>
+                    <div class="col-md-3" ><a id="unsubscribe" th:topic-id="${subscription.topic.id}">Unsubscribe</a></div>
+                    <br><br>
+                    <table>
+                        <tr>
+                            <th>Subscriptions</th>
+                            <th>Posts</th>
+                        </tr>
+                        <tr>
+                            <td><a th:text="${subscription.subscriptionCount}"></a></td>
+                            <td><a th:text="${subscription.postCount}"></a></td>
+                        </tr>
+                    </table>
+                    <div class="dropdown first" style="display: inline-block;">
+                        <select id="seriousness" th:topicId="${subscription.topic.id}" th:username="${subscription.user.username}"
+                                class="btn btn-primary" style="font-size: 12px" name="seriousness">
+                            <option th:each="seriousness : ${T(com.project.linkSharing.enums.Seriousness).values()}"
+                                    th:value="${seriousness.getValue()}" th:text="${seriousness.getValue()}"></option>
+                        </select>
+                    </div>
+                    <div class="dropdown first" style="display: inline-block;">
+                        <select id="visibility" th:topicId="${subscription.topic.id}" class="btn btn-primary" style="font-size: 12px" name="visibility">
+                            <option th:each="visibility : ${T(com.project.linkSharing.enums.Visibility).values()}"
+                                    th:value="${visibility.getValue()}"
+                                    th:text="${visibility.getValue()}"></option>
+                        </select>
+                    </div>
+                    <div class="input-group-btn first" style="display: inline-block;">
+                        <button class="btn btn-default" type="button" style="font-size: 12px"
+                                data-toggle="modal" data-target="#send-invite-modal">
+                            <i class="fa fa-envelope" aria-hidden="true"></i>
+                        </button>
+
+
+                        <button id="editTopic" class="btn btn-default" type="submit" style="font-size: 12px">
+                            <i class="fa fa-file" aria-hidden="true"></i>
+                        </button>
+                        <button id="deleteTopic" th:topicId="${subscription.topic.id}" class="btn btn-default" type="submit" style="font-size: 12px">
+                            <i class="fa fa-trash-o" aria-hidden="true"></i>
+                        </button>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
 </div>
 </body>
 </html>

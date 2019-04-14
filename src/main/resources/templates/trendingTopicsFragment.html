@@ -14,12 +14,13 @@
     <div class="panel panel-default" style="margin-top:15px;">
         <div class="panel-heading bg-primary">Trending Posts</div>
         <div class="panel-body">
+            <div style="margin-bottom: 10px" th:each="resources: ${allResourcesList}">
             <div class="col-md-3" style="padding: 0px">
-                <img th:src="@{/images/TTN-logo.jpg}" alt="image-icon" class="img-thumbnail">
+                <img th:src="@{'/images/' + ${resources.user.id} +'.jpeg'}" alt="image-icon" class="img-thumbnail">
             </div>
             <div class="col-md-9">
-                <span class="col-md-3">Mansi Garg</span>
-                <span class="col-md-3" style="opacity:0.5;">@mansi</span>
+                <span class="col-md-3" th:text="${resources.user.firstName} + ' ' + ${resources.user.lastName}"></span>
+                <span class="col-md-3" style="opacity:0.5;" th:text="${resources.user.username}"></span>
                 <br><br>
                 <table>
                     <tr>
@@ -32,26 +33,30 @@
                     </tr>
                 </table>
                 <div class="dropdown first" style="display: inline-block">
-                    <select class="btn btn-primary">
-                        <option>Serious</option>
-                        <option>Casual</option>
-                        <option>Very Serious</option>
+                    <select id="seriousness" th:topicId="${resources.topic.id}" th:username="${resources.user.username}"
+                            class="btn btn-primary" style="font-size: 12px" name="seriousness">
+                        <option th:each="seriousness : ${T(com.project.linkSharing.enums.Seriousness).values()}"
+                                th:value="${seriousness.getValue()}" th:text="${seriousness.getValue()}"></option>
                     </select>
                 </div>
                 <div class="dropdown first" style="display: inline-block">
-                    <select class="btn btn-primary">
-                        <option>Private</option>
-                        <option>Public</option>
+                    <select id="visibility" th:topicId="${resources.topic.id}" class="btn btn-primary" style="font-size: 12px" name="visibility">
+                        <option th:each="visibility : ${T(com.project.linkSharing.enums.Visibility).values()}"
+                                th:value="${visibility.getValue()}"
+                                th:text="${visibility.getValue()}"></option>
                     </select>
                 </div>
                 <div class="input-group-btn first" style="display: inline-block">
-                    <button class="btn btn-default" type="submit">
+                    <button class="btn btn-default" type="button" style="font-size: 12px"
+                            data-toggle="modal" data-target="#send-invite-modal">
                         <i class="fa fa-envelope" aria-hidden="true"></i>
                     </button>
-                    <button class="btn btn-default" type="submit">
+
+
+                    <button id="editTopic" class="btn btn-default" type="submit" style="font-size: 12px">
                         <i class="fa fa-file" aria-hidden="true"></i>
                     </button>
-                    <button class="btn btn-default" type="submit">
+                    <button th:topicId="${resources.topic.id}" class="btn btn-default" type="submit" style="font-size: 12px">
                         <i class="fa fa-trash-o" aria-hidden="true"></i>
                     </button>
                 </div>

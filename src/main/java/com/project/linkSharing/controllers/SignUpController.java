@@ -28,6 +28,7 @@ public class SignUpController {
     public String submit(@ModelAttribute User user, HttpServletRequest httpServletRequest){
         if(user.getPassword().equals(httpServletRequest.getParameter("confirmPassword"))){
             session.setAttribute("user", user);
+            user.setActivate("activate");
             userService.saveUser(user);
             return "redirect:/dashboard";
         }

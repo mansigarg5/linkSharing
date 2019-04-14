@@ -13,6 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.List;
 import java.util.Optional;
 
 @Controller
@@ -27,7 +28,9 @@ public class PostsController {
     public ModelAndView display(@PathVariable("id") Integer resourcesid){
         Optional<Resources> optionalResources = resourcesService.findResourceById(resourcesid);
         Resources resources = optionalResources.get();
-        return new ModelAndView("post").addObject("resources", resources);
+        List<Resources> allResourcesList = resourcesService.listResources();
+        return new ModelAndView("post").addObject("resources", resources)
+                .addObject("allResourcesList", allResourcesList);
 
     }
 

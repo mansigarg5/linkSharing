@@ -24,6 +24,12 @@ public class PostsController {
     @Autowired
     HttpSession session;
 
+    @GetMapping("/posts")
+    public ModelAndView posts(){
+        List<Resources> resourcesList = resourcesService.listResources();
+        return new ModelAndView("posts").addObject("resourcesList", resourcesList);
+    }
+
     @GetMapping("/post/{id}")
     public ModelAndView display(@PathVariable("id") Integer resourcesid){
         Optional<Resources> optionalResources = resourcesService.findResourceById(resourcesid);

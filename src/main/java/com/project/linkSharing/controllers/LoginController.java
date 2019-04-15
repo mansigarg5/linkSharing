@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -45,7 +46,7 @@ public class LoginController {
     }
 
     @PostMapping("/login")
-    public String submit(HttpServletRequest httpServletRequest) {
+    public String submit(HttpServletRequest httpServletRequest, RedirectAttributes redirectAttributes) {
         String username = httpServletRequest.getParameter("username");
         String password = httpServletRequest.getParameter("password");
         Optional<User> optional = userService.getUserByUsernameAndPassword(username, password);
@@ -56,6 +57,8 @@ public class LoginController {
                 return "redirect:/dashboard";
             }
             else {
+                redirectAttributes.addFlashAttribute("message", "Error,Login Failed! Not Authorised User");
+                redirectAttributes.addFlashAttribute("alertClass", "alert-danger");
                 return "redirect:/login";
             }
         }
@@ -75,8 +78,10 @@ public class LoginController {
         }
         else{
             List<Resources> resourcesList = resourcesService.findResourcesByTopicName(topicList);
+            List<Resources> allResourcesList = resourcesService.listResources();
             return new ModelAndView("search").addObject("topicList", topicList)
-                    .addObject("resourcesList", resourcesList);
+                    .addObject("resourcesList", resourcesList)
+                    .addObject("allResourcesList", allResourcesList);
         }
     }
 }

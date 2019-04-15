@@ -30,7 +30,7 @@
                             <span><a th:text="${resources.topic.name}"></a></span>
                         </div>
                         <div style="float: right">
-                            <label style="width: 20%">Rating:</label>
+                            <label th:if="${session.user}" style="width: 20%">Rating:</label>
                             <select th:if="${session.user}" id="rating" class="form-control" th:resourceId="${resources.id}">
                                 <option>1</option>
                                 <option>2</option>
@@ -40,10 +40,10 @@
                             </select>
                         </div>
                         <div>
-                            <span id="description" th:text="${resources.description}"></span>
+                            <span th:if="${session.user}" id="description" th:text="${resources.description}"></span>
                             <div id="hidePost" style="display: none">
-                                <input id="editPostTextBox" type="text">
-                                <button class="btn btn-primary" id="editPostButton" th:resourceId="${resources.id}">Save</button>
+                                <input th:if="${session.user}" id="editPostTextBox" type="text">
+                                <button th:if="${session.user}" class="btn btn-primary" id="editPostButton" th:resourceId="${resources.id}">Save</button>
                             </div>
                         </div>
                         <div class="row" style="display: flex">
@@ -53,8 +53,8 @@
                                 <button class="btn btn-default"><i class="fa fa-google-plus" aria-hidden="true"></i></button>
                             </div>
                             <div class="col-md-7" style="display: flex; align-items: center" th:with="var=${resources.link}">
-                                <a style="margin-right: 8px">Delete</a>
-                                <a id="editPost" style="margin-right: 8px">Edit</a>
+                                <a th:if="${session.user}" style="margin-right: 8px">Delete</a>
+                                <a th:if="${session.user}" id="editPost" style="margin-right: 8px">Edit</a>
                                 <span th:if="${var}">
                                     <a th:href="@{${resources.link}}" target="_blank" style="margin-right: 8px">View full site</a>
                                 </span>

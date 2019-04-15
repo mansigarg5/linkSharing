@@ -39,7 +39,7 @@
                         <span th:unless="${var}">
                             <a th:href="@{'/documents/' + ${resources.id} + '.txt'}" style="margin-right: 8px" download>Download</a>
                         </span>
-                        <a id="markAsRead" th:resource-id="${resources.id}" style="margin-right: 8px">Mark as read</a>
+                        <a th:if="${session.user}" id="markAsRead" th:resource-id="${resources.id}" style="margin-right: 8px">Mark as read</a>
                         <a th:href="@{'/post/' + ${resources.id}}">View post</a>
                     </div>
                 </div>

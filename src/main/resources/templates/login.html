@@ -92,6 +92,9 @@
                 <p><a href="forgotPassword" class="btn">Forgot password?</a>
                 <span style="float: right">New user?<a href="signup" class="btn">Sign up</a></span>
                 </p>
+                <div>
+                    <div th:if="${message}" th:text="${message}" th:class="${'alert ' + alertClass}"></div>
+                </div>
             </form>
         </div>
     </div>

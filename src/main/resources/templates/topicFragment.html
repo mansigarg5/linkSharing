@@ -38,15 +38,15 @@
                             <td><a th:text="${subscription.postCount}"></a></td>
                         </tr>
                     </table>
-                    <div class="dropdown first" style="display: inline-block;">
-                        <select id="seriousness" th:topicId="${subscription.topic.id}" th:username="${subscription.user.username}"
+                    <div th:if="${session.user}" class="dropdown first" style="display: inline-block;">
+                        <select th:if="${session.user.id}==${subscription.user.id}" id="seriousness" th:topicId="${subscription.topic.id}" th:username="${subscription.user.username}"
                                 class="btn btn-primary" style="font-size: 12px" name="seriousness">
                             <option th:each="seriousness : ${T(com.project.linkSharing.enums.Seriousness).values()}"
                                     th:value="${seriousness.getValue()}" th:text="${seriousness.getValue()}"></option>
                         </select>
                     </div>
-                    <div class="dropdown first" style="display: inline-block;">
-                        <select id="visibility" th:topicId="${subscription.topic.id}" class="btn btn-primary" style="font-size: 12px" name="visibility">
+                    <div th:if="${session.user}" class="dropdown first" style="display: inline-block;">
+                        <select th:if="${session.user.id}==${subscription.user.id}" id="visibility" th:topicId="${subscription.topic.id}" class="btn btn-primary" style="font-size: 12px" name="visibility">
                             <option th:each="visibility : ${T(com.project.linkSharing.enums.Visibility).values()}"
                                     th:value="${visibility.getValue()}"
                                     th:text="${visibility.getValue()}"></option>
@@ -58,13 +58,14 @@
                             <i class="fa fa-envelope" aria-hidden="true"></i>
                         </button>
 
-
-                        <button id="editTopic" class="btn btn-default" type="submit" style="font-size: 12px">
+                        <span th:if="${session.user}">
+                        <button th:if="${session.user.id}==${subscription.user.id}" id="editTopic" class="btn btn-default" type="submit" style="font-size: 12px">
                             <i class="fa fa-file" aria-hidden="true"></i>
                         </button>
-                        <button id="deleteTopic" th:topicId="${subscription.topic.id}" class="btn btn-default" type="submit" style="font-size: 12px">
+                        <button th:if="${session.user.id}==${subscription.user.id}" id="deleteTopic" th:topicId="${subscription.topic.id}" class="btn btn-default" type="submit" style="font-size: 12px">
                             <i class="fa fa-trash-o" aria-hidden="true"></i>
                         </button>
+                        </span>
                     </div>
                 </div>
             </div>
